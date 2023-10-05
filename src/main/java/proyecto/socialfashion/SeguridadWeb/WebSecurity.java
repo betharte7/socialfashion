@@ -1,3 +1,4 @@
+
 package proyecto.socialfashion.SeguridadWeb;
 
 import org.springframework.context.annotation.Configuration;
@@ -8,5 +9,5 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true)
 public class WebSecurity {
-    
+
 }
