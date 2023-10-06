@@ -54,6 +54,26 @@ public class UsuarioControlador {
         
     }
 
+    @GetMapping("/buscarpornombre")
+    public String buscarpornombre() {
+        return "buscar_nombre.html";
+    }
+
+    @PostMapping("/buscarnombre")
+    public String buscarnombre(@RequestParam String nombre, ModelMap modelo) throws Excepciones{
+        
+        try {
+            usuarioServicio.buscarUsuarioPorNombre(nombre, modelo);
+            modelo.put("exito","El Usuario ha sido encontrado.");
+            return "index.html";
+        } catch (Excepciones ex) {
+           modelo.put("error", ex.getMessage());
+           modelo.put("nombre", nombre);
+           return "buscar_nombre.html";
+        }
+        
+    }
+
     @GetMapping("/modificar/{idUsuario}")
     public String modificarUsuario(@PathVariable String idUsuario, ModelMap modelo) {
         modelo.put("usuario", usuarioServicio.getOne(idUsuario));
