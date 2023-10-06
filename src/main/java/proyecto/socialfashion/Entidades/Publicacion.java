@@ -43,15 +43,15 @@ public class Publicacion {
     
     
     @OneToOne
-    private String idUsuario;
+    private Usuario usuario;
     
     @OneToOne
-    private String idImagen;
+    private Imagen imagen;
 
     public Publicacion() {
     }
 
-    public Publicacion(String idPublicacion, String Contenido, Date alta, Categoria categoria, boolean estado, ArrayList<Like> likes, ArrayList<Comentario> comentarios, String idUsuario, String idImagen) {
+    public Publicacion(String idPublicacion, String Contenido, Date alta, Categoria categoria, boolean estado, ArrayList<Like> likes, ArrayList<Comentario> comentarios, Usuario usuario, Imagen imagen) {
         this.idPublicacion = idPublicacion;
         this.Contenido = Contenido;
         this.alta = alta;
@@ -59,9 +59,11 @@ public class Publicacion {
         this.estado = estado;
         this.likes = likes;
         this.comentarios = comentarios;
-        this.idUsuario = idUsuario;
-        this.idImagen = idImagen;
+        this.usuario = usuario;
+        this.imagen = imagen;
     }
+
+ 
 
     public String getIdPublicacion() {
         return idPublicacion;
@@ -119,27 +121,23 @@ public class Publicacion {
         this.comentarios = comentarios;
     }
 
-    public String getIdUsuario() {
-        return idUsuario;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setIdUsuario(String idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
-    public String getIdImagen() {
-        return idImagen;
+    public Imagen getImagen() {
+        return imagen;
     }
 
-    public void setIdImagen(String idImagen) {
-        this.idImagen = idImagen;
+    public void setImagen(Imagen imagen) {
+        this.imagen = imagen;
     }
 
-    @Override
-    public String toString() {
-        return "Publicacion: " + "idPublicacion=" + idPublicacion + ", Contenido=" + Contenido + ", alta=" + alta + ", categoria=" + categoria + ", estado=" + estado + ", likes=" + likes + ", comentarios=" + comentarios + ", idUsuario=" + idUsuario + ", idImagen=" + idImagen;
-    }
-    
+   
     
     
     
