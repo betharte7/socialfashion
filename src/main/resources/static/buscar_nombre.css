@@ -14,15 +14,12 @@
 
      .formulario{
     position: relative;
+    text-align: center;
     padding: 10px;
     box-shadow: 4px 4px 10px 4px rgb(186, 186, 186);
     border-radius: 10px;
     top: 50px;
     z-index: 20;
-    }
-
-    .table th{
-    border: 1px solid gray;
     }
 
     .form-h3{
