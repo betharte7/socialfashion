@@ -5,6 +5,20 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div>hola mundo</div>
+        <div>
+            <h1>
+                Social Fashion Home
+            </h1>
+            <h3><a href="/usuarios/lista">Ver Usuarios</a>  |  <a href="/usuarios/registrar">Registrar Usuario</a>  |  <a href="/usuarios/buscarpornombre">Buscar por nombre</a></h3>
+        </div>
+        <div th:if="${error != null}">
+            <h5 style="color: red">ERROR!!! :(</h5>
+            <h2 th:text="${error}"></h2>
+        </div>
+
+        <div th:if="${exito != null}">
+            <h5 style="color: green">Éxito!!! :)</h5>
+            <h2 th:text="${exito}"></h2>
+        </div>
     </body>
 </html>
