@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 import proyecto.socialfashion.Entidades.Usuario;
 import proyecto.socialfashion.Enumeraciones.Roles;
@@ -20,7 +19,7 @@ import proyecto.socialfashion.Servicios.UsuarioServicio;
 @Controller
 @RequestMapping("/usuarios")
 public class UsuarioControlador {
-    
+
     @Autowired
     private UsuarioServicio usuarioServicio;
 
@@ -36,33 +35,34 @@ public class UsuarioControlador {
     public String registrar() {
         return "registro.html";
     }
-    
+
     @PostMapping("/registro")
-    public String registro(@RequestParam String nombre, @RequestParam String email, @RequestParam String password, 
-        String password2, ModelMap modelo){
-        
+    public String registro(@RequestParam String nombre, @RequestParam String email, @RequestParam String password,
+            String password2, ModelMap modelo) {
+
         try {
             usuarioServicio.registrar(nombre, email, password, password2);
-            modelo.put("exito","El Usuario ha sido registrado correctamente.");
+            modelo.put("exito", "El Usuario ha sido registrado correctamente.");
             return "index.html";
         } catch (Excepciones ex) {
-           modelo.put("error", ex.getMessage());
-           modelo.put("nombre", nombre);
+            modelo.put("error", ex.getMessage());
+            modelo.put("nombre", nombre);
             modelo.put("email", email);
-           return "registro.html";
+            return "registro.html";
         }
-        
+
     }
 
     @GetMapping("/modificar/{idUsuario}")
     public String modificarUsuario(@PathVariable String idUsuario, ModelMap modelo) {
         modelo.put("usuario", usuarioServicio.getOne(idUsuario));
-        
+
         return "usuario_modificar.html";
     }
 
     @PostMapping("/modificar/{idUsuario}")
-    public String modificar(@PathVariable String idUsuario, String nombre, String email, String password, String password2, Roles roles, ModelMap modelo) {
+    public String modificar(@PathVariable String idUsuario, String nombre, String email, String password,
+            String password2, Roles roles, ModelMap modelo) {
         try {
             usuarioServicio.actualizar(idUsuario, nombre, email, password, password2, roles);
             return "redirect:../lista";
