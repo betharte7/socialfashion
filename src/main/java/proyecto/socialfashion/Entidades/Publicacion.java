@@ -1,7 +1,7 @@
 
 package proyecto.socialfashion.Entidades;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
@@ -14,6 +14,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.hibernate.annotations.GenericGenerator;
+
 import proyecto.socialfashion.Enumeraciones.Categoria;
 
 @Entity
@@ -36,10 +37,11 @@ public class Publicacion {
     private boolean estado;
     
     @OneToMany
-    private ArrayList<Like> likes;
+    private List<Like> likes;
     
-    @OneToMany
-    private ArrayList<Comentario> comentarios;
+
+    @OneToMany(mappedBy = "idPublicacion")
+    private List<Comentario> comentarios;
     
     
     @OneToOne
@@ -51,7 +53,7 @@ public class Publicacion {
     public Publicacion() {
     }
 
-    public Publicacion(String idPublicacion, String Contenido, Date alta, Categoria categoria, boolean estado, ArrayList<Like> likes, ArrayList<Comentario> comentarios, Usuario usuario, Imagen imagen) {
+    public Publicacion(String idPublicacion, String Contenido, Date alta, Categoria categoria, boolean estado, List<Like> likes, List<Comentario> comentarios, Usuario usuario, Imagen imagen) {
         this.idPublicacion = idPublicacion;
         this.Contenido = Contenido;
         this.alta = alta;
@@ -105,19 +107,19 @@ public class Publicacion {
         this.estado = estado;
     }
 
-    public ArrayList<Like> getLikes() {
+    public List<Like> getLikes() {
         return likes;
     }
 
-    public void setLikes(ArrayList<Like> likes) {
+    public void setLikes(List<Like> likes) {
         this.likes = likes;
     }
 
-    public ArrayList<Comentario> getComentarios() {
+    public List<Comentario> getComentarios() {
         return comentarios;
     }
 
-    public void setComentarios(ArrayList<Comentario> comentarios) {
+    public void setComentarios(List<Comentario> comentarios) {
         this.comentarios = comentarios;
     }
 

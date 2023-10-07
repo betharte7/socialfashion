@@ -3,35 +3,49 @@ package proyecto.socialfashion.Entidades;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import proyecto.socialfashion.Enumeraciones.Estado;
+import proyecto.socialfashion.Enumeraciones.Tipo;
+import proyecto.socialfashion.Enumeraciones.TipoObjeto;
+
 @Entity
-public class Resporte {
+public class Reporte {
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private String idReported;
+    private String idReporte;
+
     private String texto;
     private Estado estado;
     private Tipo tipo;
-    private String idUsuario;
-    private String idComentario;
-    private String idUsuarioDenuncia;
+    private TipoObjeto tipoObjeto;
+    private String idObjeto;
+    @ManyToOne
+    @JoinColumn(name = "idUsuario")
+    private Usuario idUsuario;
 
-    public Resporte() {
+    public Reporte() {
     }
 
-    public Resporte(String texto, Tipo tipo, String idUsuario, String idComentario, String idUsuarioDenuncia) {
+    public Reporte(String texto, Estado estado, Tipo tipo, TipoObjeto tipoObjeto, String idObjeto, Usuario idUsuario) {
         this.texto = texto;
+        this.estado = estado;
         this.tipo = tipo;
+        this.tipoObjeto = tipoObjeto;
+        this.idObjeto = idObjeto;
         this.idUsuario = idUsuario;
-        this.idComentario = idComentario;
-        this.idUsuarioDenuncia = idUsuarioDenuncia;
     }
 
-    public String getIdReported() {
-        return idReported;
+    public String getIdReporte() {
+        return idReporte;
+    }
+
+    public void setIdReporte(String idReporte) {
+        this.idReporte = idReporte;
     }
 
     public String getTexto() {
@@ -58,28 +72,28 @@ public class Resporte {
         this.tipo = tipo;
     }
 
-    public String getIdUsuario() {
+    public TipoObjeto getTipoObjeto() {
+        return tipoObjeto;
+    }
+
+    public void setTipoObjeto(TipoObjeto tipoObjeto) {
+        this.tipoObjeto = tipoObjeto;
+    }
+
+    public String getIdObjeto() {
+        return idObjeto;
+    }
+
+    public void setIdObjeto(String idObjeto) {
+        this.idObjeto = idObjeto;
+    }
+
+    public Usuario getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(String idUsuario) {
+    public void setIdUsuario(Usuario idUsuario) {
         this.idUsuario = idUsuario;
-    }
-
-    public String getIdComentario() {
-        return idComentario;
-    }
-
-    public void setIdComentario(String idComentario) {
-        this.idComentario = idComentario;
-    }
-
-    public String getIdUsuarioDenuncia() {
-        return idUsuarioDenuncia;
-    }
-
-    public void setIdUsuarioDenuncia(String idUsuarioDenuncia) {
-        this.idUsuarioDenuncia = idUsuarioDenuncia;
     }
 
 }

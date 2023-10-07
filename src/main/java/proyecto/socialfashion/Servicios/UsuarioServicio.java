@@ -7,9 +7,7 @@ import java.util.Optional;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -95,7 +93,7 @@ public class UsuarioServicio implements UserDetailsService {
 
         if (usuario.getNombre().equals(nombre)) {
             modelo.put("exito", "El Usuario ha sido encontrado.");
-            
+
         } else if (!usuario.getNombre().equals(nombre)) {
             modelo.put("error", "El Usuario NO se existe.");
         }
@@ -165,6 +163,20 @@ public class UsuarioServicio implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'loadUserByUsername'");
+    }
+
+    public String getEmailUsuarioAutenticado() {
+        org.springframework.security.core.Authentication authentication = SecurityContextHolder.getContext()
+                .getAuthentication();
+
+        if (authentication.getPrincipal() instanceof UserDetails) {
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            return userDetails.getUsername();// Puede ser el correo electrónico si lo configuraste así
+        } else {
+            // Handle the case when authentication.getPrincipal() is not a UserDetails
+            // instance.
+            return null;
+        }
     }
 
 }
