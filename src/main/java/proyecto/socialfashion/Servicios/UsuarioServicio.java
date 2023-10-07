@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.ModelMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -25,7 +26,6 @@ public class UsuarioServicio implements UserDetailsService {
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
 
-
     @Transactional
     public void registrar(String nombre, String email, String password, String password2) throws Excepciones {
 
@@ -45,7 +45,8 @@ public class UsuarioServicio implements UserDetailsService {
     }
 
     @Transactional
-    public void actualizar(String idUsuario, String nombre, String email, String password, String password2, Roles rol) throws Excepciones {
+    public void actualizar(String idUsuario, String nombre, String email, String password, String password2, Roles rol)
+            throws Excepciones {
 
         validar(nombre, email, password, password2);
 
@@ -60,7 +61,7 @@ public class UsuarioServicio implements UserDetailsService {
 
             if (usuario.getRoles().equals(Roles.USER)) {
                 usuario.setRoles(Roles.USER);
-            } else if (usuario.getRoles().equals(Roles.ADMIN)){
+            } else if (usuario.getRoles().equals(Roles.ADMIN)) {
                 usuario.setRoles(Roles.ADMIN);
             }
 
@@ -88,6 +89,20 @@ public class UsuarioServicio implements UserDetailsService {
     }
 
     @Transactional
+    public void buscarUsuarioPorNombre(String nombre, ModelMap modelo) throws Excepciones {
+
+        Usuario usuario = usuarioRepositorio.buscarPorNombre(nombre);
+
+        if (usuario.getNombre().equals(nombre)) {
+            modelo.put("exito", "El Usuario ha sido encontrado.");
+            
+        } else if (!usuario.getNombre().equals(nombre)) {
+            modelo.put("error", "El Usuario NO se existe.");
+        }
+
+    }
+
+    @Transactional
     public void cambiarRol(String idUsuario) {
         Optional<Usuario> respuesta = usuarioRepositorio.findById(idUsuario);
 
@@ -100,7 +115,7 @@ public class UsuarioServicio implements UserDetailsService {
                 usuario.setRoles(Roles.ADMIN);
 
             } else if (usuario.getRoles().equals(Roles.ADMIN)) {
-                
+
                 usuario.setRoles(Roles.USER);
             }
         }
@@ -120,7 +135,7 @@ public class UsuarioServicio implements UserDetailsService {
                 usuario.setEstado(false);
 
             } else if (usuario.getEstado() == false) {
-                
+
                 usuario.setEstado(true);
             }
         }
@@ -133,7 +148,7 @@ public class UsuarioServicio implements UserDetailsService {
             throw new Excepciones("El nombre no puede estar vacío");
         }
 
-         if (email.isEmpty() || email == null) {
+        if (email.isEmpty() || email == null) {
             throw new Excepciones("El email no puede estar vacío");
         }
 
@@ -152,8 +167,4 @@ public class UsuarioServicio implements UserDetailsService {
         throw new UnsupportedOperationException("Unimplemented method 'loadUserByUsername'");
     }
 
-    
-
-    
-
-}   
+}
