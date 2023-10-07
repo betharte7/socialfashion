@@ -1,0 +1,155 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-image: url("https://images.pexels.com/photos/1884584/pexels-photo-1884584.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  font-family: "Euclid Circular A";
+  color: #000;
+  animation: rotate 5s infinite alternate linear;
+  background-position: center 90%; /* Ajusta la posición vertical de la imagen */
+}
+
+/* Media query para pantallas más grandes */
+@media screen and (min-width: 1473px) {
+  body {
+    background-position: center bottom -100px; /* Ajusta la posición vertical para pantallas más grandes */
+  }
+}
+
+/* Media query para pantallas en el rango de 1413px a 1472px */
+@media screen and (max-width: 1472px) and (min-width: 1413px) {
+  body {
+    background-position: center 85%; /* Ajusta la posición vertical para el rango específico */
+  }
+}
+
+/* Media query para pantallas en el rango de 1411px a 1412px */
+@media screen and (max-width: 1412px) and (min-width: 1411px) {
+  body {
+    background-position: center 80%; /* Ajusta la posición vertical para el rango específico */
+  }
+}
+
+/* Media query para pantallas en el rango de 1409px a 1410px */
+@media screen and (max-width: 1410px) and (min-width: 1409px) {
+  body {
+    background-position: center 75%; /* Ajusta la posición vertical para el rango específico */
+  }
+}
+
+.navbar {
+  position: relative; /* Cambia a posición relativa */
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.5
+  ); /* Fondo semi-transparente para el navbar */
+  z-index: 2; /* Asegura que el navbar tenga un z-index mayor */
+}
+
+.login {
+  position: absolute;
+  top: 20%; /* Ajusta este valor según tus necesidades */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 600px;
+  padding: 20px;
+  border-radius: 10px;
+  background: #ffffff;
+  text-align: center;
+  z-index: 1;
+}
+
+@media screen and (max-height: 770px) {
+  .login {
+    top: 10%; /* Ajusta este valor según tus necesidades */
+  }
+}
+
+.login > img {
+  width: 160px;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+.login > h2 {
+  font-size: 36px;
+  font-weight: 600;
+  margin: 0 0 30px;
+}
+
+.login > h3 {
+  color: rgba(0, 0, 0, 0.38);
+  margin: 0 0 6px;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.login-form {
+  display: grid;
+  gap: 20px;
+  place-items: center;
+  width: 100%;
+  margin: 0;
+}
+
+.login-form > input,
+.login-form > button {
+  height: 56px;
+  width: 100%;
+  outline: none;
+  padding: 0;
+  border-radius: 10px;
+  font-family: inherit;
+}
+
+.login-form > input {
+  background: #eeeeee;
+  border: 0;
+  font-size: 18px;
+  padding: 0;
+  text-align: center;
+}
+
+.login-form > button {
+  cursor: pointer;
+  height: 56px;
+  background: #685aff;
+  color: #f9f9f9;
+  border: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+.login-form > a {
+  color: #685aff;
+  font-size: 1rem;
+  text-align: left;
+  text-decoration: none;
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1280px) {
+  /* Pantallas de 1024x768 a 1280x1024 */
+  .login {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
