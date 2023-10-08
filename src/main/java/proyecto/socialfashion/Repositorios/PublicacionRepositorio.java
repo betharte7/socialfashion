@@ -1,23 +1,26 @@
 
 package proyecto.socialfashion.Repositorios;
 
-import javax.transaction.Transactional;
+
+import java.util.Date;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import proyecto.socialfashion.Entidades.Publicacion;
-import proyecto.socialfashion.Entidades.Usuario;
-import proyecto.socialfashion.Enumeraciones.Categoria;
-import proyecto.socialfashion.Excepciones.MiException;
 
 @Repository
-public interface PublicacionRepositorio extends JpaRepository<Usuario, String> {
+public interface PublicacionRepositorio extends JpaRepository<Publicacion, String> {
     
    
+    @Query("SELECT p FROM Publicacion p WHERE p.Contenido = :contenido")
+    public Publicacion buscarPorContenido(@Param("contenido")String contenido);
     
+    @Query("SELECT p FROM Publicacion p WHERE p.alta = :fechaAlta")
+    public Publicacion buscarPorFechaDeAlta(@Param("fechaAlta")Date fechaAlta);
     
-    
-    
-    
+
+
     
 }
 
