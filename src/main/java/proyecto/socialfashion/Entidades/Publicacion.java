@@ -37,10 +37,10 @@ public class Publicacion {
     
     @OneToMany
     private ArrayList<Like> likes;
-    
+    /*
     @OneToMany
     private ArrayList<Comentario> comentarios;
-    
+    */
     
     @OneToOne
     private Usuario usuario;
@@ -51,14 +51,14 @@ public class Publicacion {
     public Publicacion() {
     }
 
-    public Publicacion(String idPublicacion, String Contenido, Date alta, Categoria categoria, boolean estado, ArrayList<Like> likes, ArrayList<Comentario> comentarios, Usuario usuario, Imagen imagen) {
+    public Publicacion(String idPublicacion, String Contenido, Date alta, Categoria categoria, boolean estado, ArrayList<Like> likes, /*ArrayList<Comentario> comentarios,*/ Usuario usuario, Imagen imagen) {
         this.idPublicacion = idPublicacion;
         this.Contenido = Contenido;
         this.alta = alta;
         this.categoria = categoria;
         this.estado = estado;
         this.likes = likes;
-        this.comentarios = comentarios;
+        /*this.comentarios = comentarios;*/
         this.usuario = usuario;
         this.imagen = imagen;
     }
@@ -112,7 +112,7 @@ public class Publicacion {
     public void setLikes(ArrayList<Like> likes) {
         this.likes = likes;
     }
-
+/*
     public ArrayList<Comentario> getComentarios() {
         return comentarios;
     }
@@ -120,7 +120,7 @@ public class Publicacion {
     public void setComentarios(ArrayList<Comentario> comentarios) {
         this.comentarios = comentarios;
     }
-
+*/
     public Usuario getUsuario() {
         return usuario;
     }

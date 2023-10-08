@@ -13,9 +13,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import proyecto.socialfashion.Entidades.Publicacion;
+import proyecto.socialfashion.Entidades.Usuario;
 import proyecto.socialfashion.Enumeraciones.Categoria;
-import proyecto.socialfashion.Excepciones.MiException;
+import proyecto.socialfashion.Excepciones.Excepciones;
+
 import proyecto.socialfashion.Servicios.PublicacionServicio;
+import proyecto.socialfashion.Servicios.UsuarioServicio;
 
 @Controller
 public class PublicacionControlador {
@@ -34,11 +37,11 @@ public class PublicacionControlador {
             ArrayList<Publicacion> publicacionesAlta = (ArrayList<Publicacion>) publicacionServicio.listaPublicacionOrdenadasPorFechaAlta();
             modelo.put("listaPorTendencias", publicacionesAlta);
             //HTML con la pagina en donde se encuentran las publicaciones
-            return""
-        } catch (MiException ex) {
+            return"";
+        } catch (Excepciones ex) {
             modelo.put("Error", ex.getMessage());
             //HTML en donde se se trabaje el error
-            return""
+            return"";
         }
     }
     
@@ -57,32 +60,20 @@ public class PublicacionControlador {
     
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @PostMapping("/registro/{idUsuario}")
-    public String registro(@RequestParam String contenido, @RequestParam String categoria,@PathVariable String idUsuario, ModelMap modelo, MultipartFile archivo){
+    public String registro(@RequestParam String contenido, @RequestParam String categoria, @PathVariable String idUsuario, ModelMap modelo, MultipartFile archivo){
         
         try {
             
             //Servicio para traer un usuario
             Usuario usuario = usuarioServicio.getOne(idUsuario);
-            
-            if (categoria.equalsIgnoreCase("INDUMENTARIA")) {
-                 publicacionServicio.CrearPublicacion(archivo, contenido,new Date(), Categoria.INDUMENTARIA, usuario);
-                
-            } else if(categoria.equalsIgnoreCase("MAQUILLAJE")) {
-             publicacionServicio.CrearPublicacion(archivo, contenido,new Date() , Categoria.MAQUILLAJE, usuario);
-                
-            }else if(categoria.equalsIgnoreCase("CALZADO")){
-             publicacionServicio.CrearPublicacion(archivo, contenido,new Date() , Categoria.CALZADO, usuario);
-                
-            }else{
-             publicacionServicio.CrearPublicacion(archivo, contenido,new Date() , Categoria.MARROQUINERIA, usuario);
-            }
-           
-            
+
+            publicacionServicio.CrearPublicacion(archivo, contenido,new Date() , categoria, usuario);
+
             modelo.put("exito", "Publicacion registrada correctamente!");
             
             //Agg html en el que este el formulario. IDEM ANTERIOR
             return "";
-        } catch (MiException ex) {
+        } catch (Excepciones ex) {
             
             modelo.put("Error", ex.getMessage());
             modelo.put("imagen", archivo);
@@ -108,10 +99,11 @@ public class PublicacionControlador {
             //HTML en el que se encuentran las tendencias
             return"";
             
-        } catch (MiException ex) {
-        
+        } catch (Excepciones ex) {
+            modelo.put("Error", ex.getMessage());
             
             //HTML EN EL QUE SE INDIQUE ERROR DE TENDENCIAS
+            return""
         }
     
     
