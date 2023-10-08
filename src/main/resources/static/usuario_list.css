@@ -21,6 +21,11 @@
     z-index: 20;
     }
 
+    .formulario {
+        overflow-x: auto;
+        overflow-y: auto;
+    }
+
     .table th{
     border: 1px solid gray;
     }
