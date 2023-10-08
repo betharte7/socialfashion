@@ -73,6 +73,7 @@ body {
   z-index: 1;
 }
 
+
 @media screen and (max-height: 770px) {
   .login {
     top: 10%; /* Ajusta este valor según tus necesidades */
@@ -153,3 +154,4 @@ body {
     transform: translate(-50%, -50%);
   }
 }
+
