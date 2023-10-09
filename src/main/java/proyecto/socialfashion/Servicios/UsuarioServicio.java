@@ -97,7 +97,7 @@ public class UsuarioServicio implements UserDetailsService {
             modelo.put("exito", "El Usuario ha sido encontrado.");
             
         } else if (!usuario.getNombre().equals(nombre)) {
-            modelo.put("error", "El Usuario NO se existe.");
+            modelo.put("error", "El Usuario NO existe.");
         }
 
     }
