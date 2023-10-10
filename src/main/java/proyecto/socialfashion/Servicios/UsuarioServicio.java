@@ -67,9 +67,7 @@ public class UsuarioServicio implements UserDetailsService {
             usuario.setEstado(true);
 
             usuarioRepositorio.save(usuario);
-
         }
-
     }
 
     public Usuario getOne(String idUsuario) {

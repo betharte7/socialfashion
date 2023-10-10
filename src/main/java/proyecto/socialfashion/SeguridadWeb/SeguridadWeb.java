@@ -23,7 +23,7 @@ public class SeguridadWeb {
 
     @Autowired
     public UsuarioServicio usuarioServicio;
-    
+
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(usuarioServicio)
@@ -33,30 +33,26 @@ public class SeguridadWeb {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests()
-                .antMatchers("/admin/*").hasRole("ADMIN")
-                .antMatchers("/css/*", "/js/*", "/img/*", "/**")
-                .permitAll()
-                .and().formLogin()
-                .loginPage("/login")
-                .loginProcessingUrl("/logincheck")
-                .usernameParameter("nombreUsuario")
-                .passwordParameter("password")
-                .defaultSuccessUrl("/inicio")
-                .permitAll() 
-                .and().logout()
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/login")
-                .permitAll()
-                .and().csrf().disable();
-        
-        
+                .authorizeRequests(requests -> requests
+                        .antMatchers("/admin/*").hasRole("ADMIN")
+                        .antMatchers("/css/*", "/js/*", "/img/*", "/**")
+                        .permitAll())
+                .formLogin(login -> login
+                        .loginPage("/login")
+                        .loginProcessingUrl("/logincheck")
+                        .usernameParameter("nombreUsuario")
+                        .passwordParameter("password")
+                        .defaultSuccessUrl("/inicio")
+                        .permitAll())
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/login")
+                        .permitAll())
+                .csrf(csrf -> csrf.disable());
+
         return http.build();
     }
 
-    private String obtenerUsuarioLogueado() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return authentication.getName();
-    }
+
     
 }
