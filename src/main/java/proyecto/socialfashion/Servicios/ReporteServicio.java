@@ -1,8 +1,8 @@
 package proyecto.socialfashion.Servicios;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -20,7 +20,6 @@ public class ReporteServicio {
     @Autowired
     private ReporteRepositorio reporteRepositorio;
 
-
     public void guardarReporte(Reporte reporte) {
         reporteRepositorio.save(reporte);
     }
@@ -28,8 +27,13 @@ public class ReporteServicio {
     @Transactional
     public void desestimarReporte(Reporte reporte) {
         Reporte reporteAux = reporte;
-
         reporteAux.setEstado(Estado.DESESTIMADO);
+        reporteRepositorio.save(reporteAux);
+    }
+    @Transactional
+    public void aceptarReporte(Reporte reporte) {
+        Reporte reporteAux = reporte;
+        reporteAux.setEstado(Estado.ACEPTADO);
         reporteRepositorio.save(reporteAux);
     }
 
@@ -40,39 +44,33 @@ public class ReporteServicio {
     }
 
     @Transactional
-    public List<Reporte> obtenerUsuariosReportados() {
-        List<Reporte> reporteAux = reporteRepositorio.findAll();
-        List<Reporte> reporteUsuario = new ArrayList();
-        for (Reporte reporte : reporteAux) {
-            if(reporte.getEstado()==Estado.PENDIENTE && reporte.getTipoObjeto()==TipoObjeto.USUARIO){
-                reporteUsuario.add(reporte);
-            }
-        }
-        return reporteUsuario;
+    public List<Reporte> obtenerUsuariosReportadosPendientes() {
+        List<Reporte> reportes = reporteRepositorio.findAll();
+        return reportes.stream()
+                .filter(reporte -> reporte.getEstado() == Estado.PENDIENTE && reporte.getTipoObjeto() == TipoObjeto.PUBLICACION)
+                .collect(Collectors.toList());
+
+
     }
 
-
     @Transactional
-    public ArrayList<Reporte> obtenerComentariosReportados(){
-        List<Reporte> reporteAux= reporteRepositorio.findAll();
-        ArrayList<Reporte> reporteComentario = new ArrayList();
-        for (Reporte reporte : reporteAux) {
-            if(reporte.getEstado()==Estado.PENDIENTE && reporte.getTipoObjeto()==TipoObjeto.COMENTARIO){
-                reporteComentario.add(reporte);
-            }
-        }
-        return reporteComentario;
+    public List<Reporte> obtenerComentariosReportadosPendientes(){
+        List<Reporte> reportes = reporteRepositorio.findAll();
+        return reportes.stream()
+        .filter(reporte -> reporte.getEstado() == Estado.PENDIENTE && reporte.getTipoObjeto() == TipoObjeto.COMENTARIO)
+        .collect(Collectors.toList());
     }
     
+    
     @Transactional
-    public ArrayList<Reporte> obtenerPublicacionesReportadas() {
-        List<Reporte> reporteAux = reporteRepositorio.findAll();
-        ArrayList<Reporte> reportePublicacion = new ArrayList();
-        for (Reporte reporte : reporteAux) {
-            if(reporte.getEstado()==Estado.PENDIENTE && reporte.getTipoObjeto()==TipoObjeto.PUBLICACION){
-                reportePublicacion.add(reporte);
-            }
-        }
-        return reportePublicacion;
+    public List<Reporte> obtenerPublicacionesReportadasPendientes() {
+        List<Reporte> reportes = reporteRepositorio.findAll();
+    
+        return reportes.stream()
+            .filter(reporte -> reporte.getEstado() == Estado.PENDIENTE && reporte.getTipoObjeto() == TipoObjeto.PUBLICACION)
+            .collect(Collectors.toList());
     }
+
+
+
 }

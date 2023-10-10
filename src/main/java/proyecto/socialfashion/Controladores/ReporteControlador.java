@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,47 +39,49 @@ public class ReporteControlador {
 
     @PostMapping("/publicacion/{idPublicacion}")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<String> denunciarPublicacion(@PathVariable String idPublicacion,
+    public String denunciarPublicacion(@PathVariable String idPublicacion,
             @RequestBody String texto,
             @RequestParam Tipo tipo,
             @RequestParam TipoObjeto tipoObjeto,
             @RequestParam String idObjeto,
-            @AuthenticationPrincipal Usuario usuario) {
+            @AuthenticationPrincipal Usuario usuario, ModelMap modelo) {
 
         if (tipo != Tipo.SPAM && tipo != Tipo.CONTENIDO_OFENSIVO && tipo != Tipo.INCUMPLIMIENTO_DE_REGLAS) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Tipo de denuncia inválido");
+            modelo.addAttribute("mensaje", "Tipo de denuncia inválido");
         }
         if (tipoObjeto != TipoObjeto.COMENTARIO && tipoObjeto != TipoObjeto.PUBLICACION) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Tipo de objeto de denuncia inválido");
+            modelo.addAttribute("mensaje", "Tipo de objeto de denuncia inválido");
         }
 
         if (tipoObjeto == TipoObjeto.COMENTARIO) {
             Optional<Comentario> respuestaC = comentarioServicio.buscarComentarioPorId(idObjeto);
 
             if (respuestaC.isPresent()) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No se encontro comentario");
+                modelo.addAttribute("mensaje", "No se encontro comentario");
             }
         }
         if (tipoObjeto == TipoObjeto.PUBLICACION) {
             Optional<Publicacion> respuestaP = publicacionServicio.buscarPublicacionPorId(idObjeto);
 
             if (respuestaP.isPresent()) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No se encontro Publicación");
+                modelo.addAttribute("mensaje", "No se encontro Publicación");
             }
         }
         if (tipoObjeto == TipoObjeto.USUARIO) {
             Optional<Publicacion> respuestaU = publicacionServicio.buscarPublicacionPorId(idObjeto);
 
             if (respuestaU.isPresent()) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No se encontro Usuario");
+                modelo.addAttribute("mensaje", "No se encontro Usuario");
             }
         }
         try {
             Reporte reporte = new Reporte(texto, Estado.PENDIENTE, tipo, tipoObjeto, idObjeto, usuario);
             reporteServicios.guardarReporte(reporte);
+            modelo.addAttribute("mensaje", "Reporte guardado exitosamente");
+
             return ResponseEntity.status(HttpStatus.CREATED).body("Reporte guardado exitosamente");
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al guardar el reporte");
+            modelo.addAttribute("mensaje", "Error al guardar el reporte");
         }
 
     }

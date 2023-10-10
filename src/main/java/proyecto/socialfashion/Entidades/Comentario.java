@@ -19,7 +19,7 @@ public class Comentario {
 
     private String texto;
 
-    private Estado estado;
+    private Boolean estado;
     @ManyToOne
     @JoinColumn(name = "idUsuario")
     private Usuario idUsuario;
@@ -52,13 +52,7 @@ public class Comentario {
         this.texto = texto;
     }
 
-    public Estado getEstado() {
-        return estado;
-    }
-
-    public void setEstado(Estado estado) {
-        this.estado = estado;
-    }
+    
 
     public Publicacion getIdPublicacion() {
         return idPublicacion;
@@ -74,6 +68,14 @@ public class Comentario {
 
     public void setIdUsuario(Usuario idUsuario) {
         this.idUsuario = idUsuario;
+    }
+
+    public Boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
     }
 
 }

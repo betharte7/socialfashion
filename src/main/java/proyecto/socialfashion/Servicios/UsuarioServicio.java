@@ -12,6 +12,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import proyecto.socialfashion.Entidades.Comentario;
 import proyecto.socialfashion.Entidades.Usuario;
 import proyecto.socialfashion.Enumeraciones.Roles;
 import proyecto.socialfashion.Excepciones.Excepciones;
@@ -177,6 +179,11 @@ public class UsuarioServicio implements UserDetailsService {
             // instance.
             return null;
         }
+    }
+        @Transactional
+    public Optional<Usuario> buscarUsuarioOptionalId(String id) {
+
+        return usuarioRepositorio.findById(id);
     }
 
 }
