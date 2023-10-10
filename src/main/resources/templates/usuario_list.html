@@ -1,108 +1,172 @@
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-    <head> 
-        <title>Listado de usuarios</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-        <link rel="icon" type="image/png" href="../static/img/logo.png" />
-        <link rel="stylesheet" href="../static/usuario_list.css">
-    </head>
-    <body>
-        
-        <img class="img-fondo" src="https://images.pexels.com/photos/1884584/pexels-photo-1884584.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="moda">
-    
-        <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">Social Fashion</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-            <div class="offcanvas-header">
-              <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Social Fashion</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            
-            <div class="offcanvas-body">
-              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="loggin.html">Iniciar Sesion</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Registrarse</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Blog</a>
-                </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    @User
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Publicar Diseño</a></li>
-                    <li><a class="dropdown-item" href="#">Ver publicaciones</a></li>
-                    <li>
-                      <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
-                  </ul>
-                </li>
-              </ul>
-              <form class="d-flex mt-3" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-              </form>
-            </div>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+  <head>
+    <title>Listado de usuarios</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="../static/usuario_list.css" />
+  </head>
+  <body>
+    <img
+      class="img-fondo"
+      src="https://images.pexels.com/photos/1884584/pexels-photo-1884584.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+      alt="moda"
+    />
+
+    <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="http://localhost:8080/">Social Fashion</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasNavbar"
+          aria-controls="offcanvasNavbar"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="offcanvas offcanvas-end"
+          tabindex="-1"
+          id="offcanvasNavbar"
+          aria-labelledby="offcanvasNavbarLabel"
+        >
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
+              Social Fashion
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"
+            ></button>
+          </div>
+
+          <div class="offcanvas-body">
+            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+              <li class="nav-item">
+                <a
+                  class="nav-link active"
+                  aria-current="page"
+                  href="loggin.html"
+                  >Iniciar Sesion</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Registrarse</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Blog</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="/usuarios/lista"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Usuarios
+                </a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a class="dropdown-item" href="/usuarios/registrar"
+                      >Registrar Usuario</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="/usuarios/buscarpornombre"
+                      >Buscar por nombre</a
+                    >
+                  </li>
+                  <li>
+                    <hr class="dropdown-divider" />
+                  </li>
+                  <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
+                </ul>
+              </li>
+            </ul>
+            <form class="d-flex mt-3" role="search">
+              <input
+                class="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              <button class="btn btn-outline-success" type="submit">
+                Search
+              </button>
+            </form>
           </div>
         </div>
-      </nav>
+      </div>
+    </nav>
 
-        <div class="formulario container-fluid text-center col-11">
-        <h3>Lista de Usuarios</h3>
-        
-         <div th:if="${error != null}">
-            <h5 style="color: red">ERROR!!! :(</h5>
-            <p th:text="${error}"></p>
-        </div>
+    <div class="formulario container text-center col-11">
+      <h3>Lista de Usuarios</h3>
 
-        <div class="container-fluid">
-            <table class="table table-hover">
-                <thead >
-                    <tr>
-                        <th>Id</th>
-                        <th>Nombre</th>
-                        <th>Email</th>
-                        <th>Rol</th>
-                        <th>Estado</th>
-                        <th>Cambiar Rol</th>
-                        <th>Modificar</th>
-                        <th>Cambiar Estado</th>
-                    </tr>
-                </thead>
-                <tbody th:each="usuario : ${usuarios}">
-                    <tr>
-                        <th th:text="${usuario.idUsuario}"></th>
-                        <th th:text="${usuario.nombre}"></th>
-                        <th th:text="${usuario.email}"></th>
-                        <th th:text="${usuario.roles}"></th>
-                        <th th:text="${usuario.estado}"></th>
-                        <th>
-                            <a th:href="@{/usuarios/modificarRol/__${usuario.idUsuario}__}">Modificar</a>
-                        </th>
-                        <th>
-                            <a th:href="@{/usuarios/modificar/__${usuario.idUsuario}__}">Modificar</a>
-                        </th>
-                        <th>
-                            <a th:href="@{/usuarios/modificarEstado/__${usuario.idUsuario}__}">Modificar</a>
-                        </th>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        </div>
-      </div>   
+      <div th:if="${error != null}">
+        <h5 style="color: red">ERROR!!! :(</h5>
+        <p th:text="${error}"></p>
+      </div>
+
+      <div class="container-fluid">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Nombre</th>
+              <th>Email</th>
+              <th>Rol</th>
+              <th>Estado</th>
+              <th>Cambiar Rol</th>
+              <th>Modificar</th>
+              <th>Cambiar Estado</th>
+            </tr>
+          </thead>
+          <tbody th:each="usuario : ${usuarios}">
+            <tr>
+              <th th:text="${usuario.idUsuario}"></th>
+              <th th:text="${usuario.nombre}"></th>
+              <th th:text="${usuario.email}"></th>
+              <th th:text="${usuario.roles}"></th>
+              <th th:text="${usuario.estado}"></th>
+              <th>
+                <a th:href="@{/usuarios/modificarRol/__${usuario.idUsuario}__}"
+                  >Modificar</a
+                >
+              </th>
+              <th>
+                <a th:href="@{/usuarios/modificar/__${usuario.idUsuario}__}"
+                  >Modificar</a
+                >
+              </th>
+              <th>
+                <a
+                  th:href="@{/usuarios/modificarEstado/__${usuario.idUsuario}__}"
+                  >Modificar</a
+                >
+              </th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
+
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"

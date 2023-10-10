@@ -1,284 +1,335 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-    <head> 
-        <title>Listado de usuarios</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-        <link rel="stylesheet" href="../static/usuario_modificar.css"> 
-        <link rel="icon" type="image/png" href="../static/img/logo.png" />
-        <style>
-          * {
-  box-sizing: border-box;
-}
-html,
-body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+  <head>
+    <title>Listado de usuarios</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
 
-body {
-  background-image: url("https://images.pexels.com/photos/1884584/pexels-photo-1884584.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
-  font-family: "Euclid Circular A";
-  color: #000;
-  background-position: center 90%; /* Ajusta la posición vertical de la imagen */
-}
+      body {
+        background-image: url("https://images.pexels.com/photos/1884584/pexels-photo-1884584.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+        font-family: "Euclid Circular A";
+        color: #000;
+        background-position: center 90%; /* Ajusta la posición vertical de la imagen */
+      }
 
-/* Media query para pantallas más grandes */
-@media screen and (min-width: 1473px) {
-  body {
-    background-position: center bottom -100px; /* Ajusta la posición vertical para pantallas más grandes */
-  }
-}
+      /* Media query para pantallas más grandes */
+      @media screen and (min-width: 1473px) {
+        body {
+          background-position: center bottom -100px; /* Ajusta la posición vertical para pantallas más grandes */
+        }
+      }
 
-/* Media query para pantallas en el rango de 1413px a 1472px */
-@media screen and (max-width: 1472px) and (min-width: 1413px) {
-  body {
-    background-position: center 85%; /* Ajusta la posición vertical para el rango específico */
-  }
-}
+      /* Media query para pantallas en el rango de 1413px a 1472px */
+      @media screen and (max-width: 1472px) and (min-width: 1413px) {
+        body {
+          background-position: center 85%; /* Ajusta la posición vertical para el rango específico */
+        }
+      }
 
-/* Media query para pantallas en el rango de 1411px a 1412px */
-@media screen and (max-width: 1412px) and (min-width: 1411px) {
-  body {
-    background-position: center 80%; /* Ajusta la posición vertical para el rango específico */
-  }
-}
+      /* Media query para pantallas en el rango de 1411px a 1412px */
+      @media screen and (max-width: 1412px) and (min-width: 1411px) {
+        body {
+          background-position: center 80%; /* Ajusta la posición vertical para el rango específico */
+        }
+      }
 
-/* Media query para pantallas en el rango de 1409px a 1410px */
-@media screen and (max-width: 1410px) and (min-width: 1409px) {
-  body {
-    background-position: center 75%; /* Ajusta la posición vertical para el rango específico */
-  }
-}
+      /* Media query para pantallas en el rango de 1409px a 1410px */
+      @media screen and (max-width: 1410px) and (min-width: 1409px) {
+        body {
+          background-position: center 75%; /* Ajusta la posición vertical para el rango específico */
+        }
+      }
 
-.navbar {
-  position: relative;
-  background-color: rgba(
-    0,
-    0,
-    0,
-    0.5
-  ); /* Fondo semi-transparente para el navbar */
-  z-index: 2;
-}
+      .navbar {
+        position: relative;
+        background-color: rgba(
+          0,
+          0,
+          0,
+          0.5
+        ); /* Fondo semi-transparente para el navbar */
+        z-index: 2;
+      }
 
-.login {
-  position: absolute;
-  top: 20%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 90%;
-  max-width: 600px;
-  padding: 20px;
-  border-radius: 10px;
-  background: #ffffff;
-  text-align: center;
-  z-index: 1;
-}
+      .login {
+        position: absolute;
+        top: 20%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        max-width: 600px;
+        padding: 20px;
+        border-radius: 10px;
+        background: #ffffff;
+        text-align: center;
+        z-index: 1;
+      }
 
-@media screen and (max-height: 770px) {
-  .login {
-    top: 10%;
-  }
-}
+      @media screen and (max-height: 770px) {
+        .login {
+          top: 10%;
+        }
+      }
 
-.login > img {
-  width: 160px;
-  aspect-ratio: 1/1;
-  object-fit: cover;
-  border-radius: 50%;
-  margin-bottom: 20px;
-}
+      .login > img {
+        width: 160px;
+        aspect-ratio: 1/1;
+        object-fit: cover;
+        border-radius: 50%;
+        margin-bottom: 20px;
+      }
 
-.login > h2 {
-  font-size: 36px;
-  font-weight: 600;
-  margin: 0 0 30px;
-}
+      .login > h2 {
+        font-size: 36px;
+        font-weight: 600;
+        margin: 0 0 30px;
+      }
 
-.login > h3 {
-  color: rgba(0, 0, 0, 0.38);
-  margin: 0 0 6px;
-  font-weight: 500;
-  font-size: 1rem;
-}
+      .login > h3 {
+        color: rgba(0, 0, 0, 0.38);
+        margin: 0 0 6px;
+        font-weight: 500;
+        font-size: 1rem;
+      }
 
-.login-form {
-  display: grid;
-  gap: 20px;
-  place-items: center;
-  width: 100%;
-  margin: 0;
-}
+      .login-form {
+        display: grid;
+        gap: 20px;
+        place-items: center;
+        width: 100%;
+        margin: 0;
+      }
 
-.login-form > input,
-.login-form > button {
-  height: 56px;
-  width: 100%;
-  outline: none;
-  padding: 0;
-  border-radius: 10px;
-  font-family: inherit;
-}
+      .login-form > input,
+      .login-form > button {
+        height: 56px;
+        width: 100%;
+        outline: none;
+        padding: 0;
+        border-radius: 10px;
+        font-family: inherit;
+      }
 
-.login-form > input {
-  background: #eeeeee;
-  border: 0;
-  font-size: 18px;
-  padding: 0;
-  text-align: center;
-}
+      .login-form > input {
+        background: #eeeeee;
+        border: 0;
+        font-size: 18px;
+        padding: 0;
+        text-align: center;
+      }
 
-.login-form > button {
-  cursor: pointer;
-  height: 56px;
-  background: #685aff;
-  color: #f9f9f9;
-  border: 0;
-  font-size: 1rem;
-  font-weight: 600;
-  letter-spacing: 2px;
-}
+      .login-form > button {
+        cursor: pointer;
+        height: 56px;
+        background: #685aff;
+        color: #f9f9f9;
+        border: 0;
+        font-size: 1rem;
+        font-weight: 600;
+        letter-spacing: 2px;
+      }
 
-.login-form > a {
-  color: #685aff;
-  font-size: 1rem;
-  text-align: left;
-  text-decoration: none;
-}
+      .login-form > a {
+        color: #685aff;
+        font-size: 1rem;
+        text-align: left;
+        text-decoration: none;
+      }
 
-@media screen and (min-width: 1024px) and (max-width: 1280px) {
-  /* Pantallas de 1024x768 a 1280x1024 */
-  .login {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-}
+      @media screen and (min-width: 1024px) and (max-width: 1280px) {
+        /* Pantallas de 1024x768 a 1280x1024 */
+        .login {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
+    </style>
+    <link rel="stylesheet" href="../static/usuario_modificar.css" />
+  </head>
+  <body>
+    <img
+      class="img-fondo"
+      src="https://images.pexels.com/photos/1884584/pexels-photo-1884584.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+      alt="moda"
+    />
 
-        </style>
-    </head>
-    <body>
-        <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
-            <div class="container-fluid">
-              <a class="navbar-brand" href="#">Social Fashion</a>
-              <button
-                class="navbar-toggler"
-                type="button"
-                data-bs-toggle="offcanvas"
-                data-bs-target="#offcanvasNavbar"
-                aria-controls="offcanvasNavbar"
-                aria-label="Toggle navigation"
-              >
-                <span class="navbar-toggler-icon"></span>
+    <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="http://localhost:8080/">Social Fashion</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasNavbar"
+          aria-controls="offcanvasNavbar"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="offcanvas offcanvas-end"
+          tabindex="-1"
+          id="offcanvasNavbar"
+          aria-labelledby="offcanvasNavbarLabel"
+        >
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
+              Social Fashion
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"
+            ></button>
+          </div>
+
+          <div class="offcanvas-body">
+            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+              <li class="nav-item">
+                <a
+                  class="nav-link active"
+                  aria-current="page"
+                  href="loggin.html"
+                  >Iniciar Sesion</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Registrarse</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Blog</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="/usuarios/lista"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Usuarios
+                </a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a class="dropdown-item" href="/usuarios/registrar"
+                      >Registrar Usuario</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="/usuarios/buscarpornombre"
+                      >Buscar por nombre</a
+                    >
+                  </li>
+                  <li>
+                    <hr class="dropdown-divider" />
+                  </li>
+                  <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
+                </ul>
+              </li>
+            </ul>
+            <form class="d-flex mt-3" role="search">
+              <input
+                class="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              <button class="btn btn-outline-success" type="submit">
+                Search
               </button>
-              <div
-                class="offcanvas offcanvas-end"
-                tabindex="-1"
-                id="offcanvasNavbar"
-                aria-labelledby="offcanvasNavbarLabel"
-              >
-                <div class="offcanvas-header">
-                  <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
-                    Social Fashion
-                  </h5>
-                  <button
-                    type="button"
-                    class="btn-close"
-                    data-bs-dismiss="offcanvas"
-                    aria-label="Close"
-                  ></button>
-                </div>
-                <div class="offcanvas-body">
-                  <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                    <li class="nav-item">
-                      <a
-                        class="nav-link active"
-                        aria-current="page"
-                        href="loggin.html"
-                        >Iniciar Sesion</a
-                      >
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="#">Blog</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                      <a
-                        class="nav-link dropdown-toggle"
-                        href="#"
-                        role="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                      >
-                        Dropdown
-                      </a>
-                      <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li>
-                          <hr class="dropdown-divider" />
-                        </li>
-                        <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
-                      </ul>
-                    </li>
-                  </ul>
-                  <form class="d-flex mt-3" role="search">
-                    <input
-                      class="form-control me-2"
-                      type="search"
-                      placeholder="Search"
-                      aria-label="Search"
-                    />
-                    <button class="btn btn-outline-success" type="submit">
-                      Search
-                    </button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </nav>
-
-        <div class="login">                
-            <form class="login-form" th:action="@{/usuarios/modificar/__${usuario.idUsuario}__}" method="POST" enctype="multipart/form-data">                
-                <input hidden th:value="${id}" name="id">                
-                <div th:if="${error != null}">
-                    <h5 style="color: red">ERROR!!! :(</h5>
-                    <p th:text="${error}"></p>
-                </div>
-
-                <div th:if="${exito != null}">
-                    <h5 style="color: green">Éxito!!! :)</h5>
-                    <p th:text="${exito}"></p>
-                </div>
-                
-                <div class="form-group my-3">
-                    <h3 class="card-title">Editar Usuario</h3>                    
-                </div>
-
-                    <input type="text" name="nombre" placeholder="Nombre" th:value="${nombre}">                                    
-                
-                    <input type="email" name="email" placeholder="Email" th:value="${email}">                                                   
-               
-                    <input type="password"  name="password" placeholder="Contraseña" th:value="${password}">                    
-               
-                
-                    <input type="password"  name="password2" placeholder="Repetir Contraseña" th:value="${password2}">                    
-              
-                
-                <button type="submit">Modificar</button>
-            </form>             
-        <div>
+            </form>
+          </div>
         </div>
-        </div>   
-        <div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+      </div>
+    </nav>
 
-    </body>
+    <div class="formulario container-fluid m5 col-3">
+      <form
+        th:action="@{/usuarios/modificar/__${usuario.idUsuario}__}"
+        method="POST"
+        enctype="multipart/form-data"
+      >
+        <input hidden th:value="${id}" name="id" />
+
+        <div th:if="${error != null}">
+          <h5 style="color: red">ERROR!!! :(</h5>
+          <p th:text="${error}"></p>
+        </div>
+
+        <div th:if="${exito != null}">
+          <h5 style="color: green">Éxito!!! :)</h5>
+          <p th:text="${exito}"></p>
+        </div>
+
+        <div class="form-group my-3">
+          <h3 class="card-title">Editar Usuario</h3>
+        </div>
+
+        <input
+          type="text"
+          name="nombre"
+          placeholder="Nombre"
+          th:value="${nombre}"
+        />
+
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          th:value="${email}"
+        />
+
+        <input
+          type="password"
+          name="password"
+          placeholder="Contraseña"
+          th:value="${password}"
+        />
+
+        <input
+          type="password"
+          name="password2"
+          placeholder="Repetir Contraseña"
+          th:value="${password2}"
+        />
+
+        <button type="submit">Modificar</button>
+      </form>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
