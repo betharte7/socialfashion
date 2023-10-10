@@ -37,14 +37,17 @@ body {
 }
 
 .search-txt i {
+  color: red;
   font-size: 40px;
-  color: firebrick;
+  margin-top: 1%;
 }
 
 .search-txt h2 {
   color :black;
   font-size: 30px; 
-  margin-left: 10px;
+  margin-left: 5px;
+  margin-top: 2%;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 .diseños {
@@ -52,9 +55,9 @@ body {
 }
 
 .diseños h2 {
-    font-size: 25px;
-    font-weight: 400;
-    margin-bottom: 20px;
+ display: grid;
+ place-items: center;
+ font-family:'Times New Roman', Times, serif;
 }
 
 .swiper {
@@ -93,9 +96,9 @@ body {
 }
 
 .icons i:hover {
-    color: red;
+    color: rgb(255, 0, 179);
     background-color: #fefefe;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 20px rgba(1, 0, 0, 2);
     cursor: pointer;
 }
 
