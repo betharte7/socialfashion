@@ -53,6 +53,9 @@ public class SeguridadWeb {
         return http.build();
     }
 
-
+    private String obtenerUsuarioLogueado() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication.getName();
+    }
     
 }
