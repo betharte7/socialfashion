@@ -59,6 +59,13 @@ body {
   z-index: 2; /* Asegura que el navbar tenga un z-index mayor */
 }
 
+.navbar_logo{
+  width: 36px;
+  border-radius: 50%;
+  filter: opacity(0.8);
+}
+
+
 .login {
   position: absolute;
   top: 20%; /* Ajusta este valor según tus necesidades */
@@ -86,6 +93,7 @@ body {
   object-fit: cover;
   border-radius: 50%;
   margin-bottom: 20px;
+ 
 }
 
 .login > h2 {

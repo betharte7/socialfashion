@@ -18,6 +18,13 @@
     object-fit: cover;
     }
 
+    .navbar_logo{
+        width: 36px;
+        border-radius: 50%;
+        filter: opacity(0.8);
+      }
+      
+
      .formulario{
     position: relative;
     padding: 10px;
