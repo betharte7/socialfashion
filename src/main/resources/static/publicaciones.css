@@ -1,21 +1,8 @@
-<<<<<<< HEAD
 body{
     background-color: #F8F0E5;
     margin: 0;
     box-sizing: border-box;
     padding: 0;
-=======
-*{
-    margin: 0;
-    box-sizing: border-box;
-    padding: 0;
-
-    }
-
-    a{
-    font-size: 16px;
-    text-decoration: none;
->>>>>>> b8ff45eeb01bd16310bcfae5d83dd39e548ff533
     }
 
     .img-fondo{
@@ -32,15 +19,10 @@ body{
         filter: opacity(0.8);
       }
       
-
-<<<<<<< HEAD
-     .form-container{
+      
+    .form-container{
     position: relative;
     min-width: 350px;
-=======
-     .formulario{
-    position: relative;
->>>>>>> b8ff45eeb01bd16310bcfae5d83dd39e548ff533
     padding: 10px;
     box-shadow: 4px 4px 10px 4px rgb(186, 186, 186);
     border-radius: 10px;
@@ -51,15 +33,12 @@ body{
     .form-h3{
     text-align: center;
     text-shadow: 2px 2px 4px rgb(255, 255, 255);
-<<<<<<< HEAD
+
     }  
     
-=======
-<<<<<<<< HEAD:src/main/resources/static/publicaciones.css
-    }  
+
+
+
     
     
-========
-    }  
->>>>>>>> b8ff45eeb01bd16310bcfae5d83dd39e548ff533:src/main/resources/static/index.css
->>>>>>> b8ff45eeb01bd16310bcfae5d83dd39e548ff533
+
