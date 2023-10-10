@@ -22,6 +22,7 @@ import proyecto.socialfashion.Enumeraciones.TipoObjeto;
 import proyecto.socialfashion.Servicios.ComentarioServicio;
 import proyecto.socialfashion.Servicios.PublicacionServicio;
 import proyecto.socialfashion.Servicios.ReporteServicio;
+import proyecto.socialfashion.Servicios.UsuarioServicio;
 
 @Controller
 @RequestMapping("/reportar")
@@ -35,53 +36,65 @@ public class ReporteControlador {
     @Autowired
     private PublicacionServicio publicacionServicio;
 
+    @Autowired
+    private UsuarioServicio usuarioServicio; 
+
     @PostMapping("/publicacion/{idPublicacion}")
     @PreAuthorize("isAuthenticated()")
-    public String denunciarPublicacion(@PathVariable String idPublicacion,
+    public String denunciar(@PathVariable String idPublicacion,
             @RequestBody String texto,
-            @RequestParam Tipo tipo,
-            @RequestParam TipoObjeto tipoObjeto,
+            @RequestParam String tipo,
+            @RequestParam String tipoObjeto,
             @RequestParam String idObjeto,
             @AuthenticationPrincipal Usuario usuario, ModelMap modelo) {
-
-        if (tipo != Tipo.SPAM && tipo != Tipo.CONTENIDO_OFENSIVO && tipo != Tipo.INCUMPLIMIENTO_DE_REGLAS) {
+            
+        tipo = tipo.toUpperCase();
+        tipoObjeto = tipoObjeto.toUpperCase();
+        if (!tipo.equals(Tipo.SPAM.toString()) && !tipo.equals(Tipo.CONTENIDO_OFENSIVO.toString()) && !tipo.equals(Tipo.INCUMPLIMIENTO_DE_REGLAS.toString())) {
             modelo.addAttribute("mensaje", "Tipo de denuncia inválido");
         }
-        if (tipoObjeto != TipoObjeto.COMENTARIO && tipoObjeto != TipoObjeto.PUBLICACION) {
+        
+        if (!tipoObjeto.equals(TipoObjeto.COMENTARIO.toString()) && !tipoObjeto.equals(TipoObjeto.PUBLICACION.toString()) && !tipoObjeto.equals(TipoObjeto.USUARIO.toString())) {
             modelo.addAttribute("mensaje", "Tipo de objeto de denuncia inválido");
         }
 
-        if (tipoObjeto == TipoObjeto.COMENTARIO) {
+        if (tipoObjeto.equals(TipoObjeto.COMENTARIO.toString())) {
             Optional<Comentario> respuestaC = comentarioServicio.buscarComentarioPorId(idObjeto);
 
             if (respuestaC.isPresent()) {
                 modelo.addAttribute("mensaje", "No se encontro comentario");
             }
         }
-        if (tipoObjeto == TipoObjeto.PUBLICACION) {
+        if (tipoObjeto.equals(TipoObjeto.PUBLICACION.toString())) {
             Optional<Publicacion> respuestaP = publicacionServicio.buscarPublicacionPorId(idObjeto);
 
             if (respuestaP.isPresent()) {
                 modelo.addAttribute("mensaje", "No se encontro Publicación");
             }
         }
-        if (tipoObjeto == TipoObjeto.USUARIO) {
-            Optional<Publicacion> respuestaU = publicacionServicio.buscarPublicacionPorId(idObjeto);
+        if (tipoObjeto.equals(TipoObjeto.USUARIO.toString())) {
+            Optional<Usuario> respuestaU = usuarioServicio.buscarUsuarioOptionalId(idObjeto);
 
             if (respuestaU.isPresent()) {
                 modelo.addAttribute("mensaje", "No se encontro Usuario");
             }
         }
         try {
-            Reporte reporte = new Reporte(texto, Estado.PENDIENTE, tipo, tipoObjeto, idObjeto, usuario);
+            Tipo tipoEnum = Tipo.valueOf(tipo); 
+            TipoObjeto tipoObjetoEnum = TipoObjeto.valueOf(tipoObjeto); 
+        
+            Reporte reporte = new Reporte(texto, Estado.PENDIENTE, tipoEnum, tipoObjetoEnum, idObjeto, usuario);
             reporteServicios.guardarReporte(reporte);
             modelo.addAttribute("mensaje", "Reporte guardado exitosamente");
             return "index.html";
-
+        } catch (IllegalArgumentException e) {
+            modelo.addAttribute("mensaje", "Tipo de denuncia o tipo de objeto inválido");
+            return "index.html";
         } catch (Exception e) {
             modelo.addAttribute("mensaje", "Error al guardar el reporte");
             return "index.html";
         }
+        
 
     }
 
