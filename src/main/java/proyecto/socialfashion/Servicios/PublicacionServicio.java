@@ -114,7 +114,13 @@ public class PublicacionServicio {
        
         return listaPublicacion;
     } 
-
+    
+    
+    
+    
+    
+    
+    
     @Transactional
     public void BajaPublicacion(String idPublicacion){
         
