@@ -147,31 +147,31 @@ public class AdminReportesControlador {
                             comentarioServicio.cambiarEstado(comentario.getIdComentario());
                             reporteServicio.aceptarReporte(reporte);
                             modelo.addAttribute("mensaje", "Comentario dado de baja");
-                            return "admin/usuarios";
+                            return "admin/comentario";
                         } else {
                             modelo.addAttribute("mensaje", "COmentario ya estaba dado de baja");
-                            return "admin/usuarios";
+                            return "admin/comentario";
                         }
                     } else if (estado.equals(Estado.DESESTIMADO.toString())) {
                         reporteServicio.desestimarReporte(reporte);
                     } else {
                         modelo.addAttribute("mensaje", "Opción no permitida");
-                        return "admin/usuarios";
+                        return "admin/comentario";
                     }
 
                 } else {
                     modelo.addAttribute("mensaje", "Reporte inexistente");
-                    return "admin/usuarios";
+                    return "admin/comentario";
                 }
             } else {
                 modelo.addAttribute("mensaje", "COmentario no encontrado");
-                return "admin/usuarios";
+                return "admin/comentario";
             }
         } else {
             modelo.addAttribute("mensaje", "Usuario no permitido");
             return "index.html";
         }
-        return "admin/usuarios";
+        return "admin/comentario";
     }
 
      @PostMapping("/publicacion")
@@ -194,31 +194,31 @@ public class AdminReportesControlador {
                             publicacionServicio.BajaPublicacion(publicacion.getIdPublicacion());
                             reporteServicio.aceptarReporte(reporte);
                             modelo.addAttribute("mensaje", "Publicacion dado de baja");
-                            return "admin/usuarios";
+                            return "admin/publicacion";
                         } else {
                             modelo.addAttribute("mensaje", "Pblicacion ya estaba dado de baja");
-                            return "admin/usuarios";
+                            return "admin/publicacion";
                         }
                     } else if (estado.equals(Estado.DESESTIMADO.toString())) {
                         reporteServicio.desestimarReporte(reporte);
                     } else {
                         modelo.addAttribute("mensaje", "Opción no permitida");
-                        return "admin/usuarios";
+                        return "admin/publicacion";
                     }
 
                 } else {
                     modelo.addAttribute("mensaje", "Reporte inexistente");
-                    return "admin/usuarios";
+                    return "admin/publicacion";
                 }
             } else {
                 modelo.addAttribute("mensaje", "Publicacion no encontrado");
-                return "admin/usuarios";
+                return "admin/publicacion";
             }
         } else {
             modelo.addAttribute("mensaje", "Usuario no permitido");
             return "index.html";
         }
-        return "admin/usuarios";
+        return "admin/publicacion";
     }
 
 }

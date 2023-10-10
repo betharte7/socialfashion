@@ -8,7 +8,6 @@ import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import proyecto.socialfashion.Enumeraciones.Estado;
 
 @Entity
 public class Comentario {

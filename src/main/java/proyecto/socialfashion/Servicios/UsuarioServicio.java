@@ -13,7 +13,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import proyecto.socialfashion.Entidades.Comentario;
 import proyecto.socialfashion.Entidades.Usuario;
 import proyecto.socialfashion.Enumeraciones.Roles;
 import proyecto.socialfashion.Excepciones.Excepciones;

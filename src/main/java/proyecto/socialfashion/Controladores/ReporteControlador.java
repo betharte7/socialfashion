@@ -1,8 +1,6 @@
 package proyecto.socialfashion.Controladores;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -78,10 +76,11 @@ public class ReporteControlador {
             Reporte reporte = new Reporte(texto, Estado.PENDIENTE, tipo, tipoObjeto, idObjeto, usuario);
             reporteServicios.guardarReporte(reporte);
             modelo.addAttribute("mensaje", "Reporte guardado exitosamente");
+            return "index.html";
 
-            return ResponseEntity.status(HttpStatus.CREATED).body("Reporte guardado exitosamente");
         } catch (Exception e) {
             modelo.addAttribute("mensaje", "Error al guardar el reporte");
+            return "index.html";
         }
 
     }
