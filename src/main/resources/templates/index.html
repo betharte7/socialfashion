@@ -66,6 +66,14 @@
                    </div>
             </div>
         </div>
+      
+      <div class="swiper-wrapper">
+        <div th:each="publicacion : ${publicacionesAlta}" class="swiper-slide">
+        <h4 th:text="${publicacion.titulo}"></h4>
+        <img th:src="@{imagen/publicada/__${publicacionesAlta.idPublicacion}__}" alt="Img de la publicacion">
+        <p th:text="${publicacion.contenido}"></p>
+        </div>
+    </div>
 
     </section>
 

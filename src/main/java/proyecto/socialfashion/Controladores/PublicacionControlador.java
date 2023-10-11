@@ -3,6 +3,7 @@ package proyecto.socialfashion.Controladores;
 
 import java.util.ArrayList;
 import java.util.Date;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -49,8 +50,10 @@ public class PublicacionControlador {
     
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping("/publicacionesSocialFashion")
-    public String publicacionesParaRegistados(ModelMap modelo){
+    public String publicacionesParaRegistados(HttpSession session, ModelMap modelo){
         /*try {*/
+            Usuario logueado = (Usuario) session.getAttribute("usuariosession");
+            modelo.addAttribute("usuario", logueado);
             ArrayList<Publicacion> publicacionesAlta = (ArrayList<Publicacion>) publicacionServicio.listaPublicacionOrdenadasPorFechaAlta();
             modelo.addAttribute("publicacionesAlta", publicacionesAlta);
             //HTML con la pagina en donde se encuentran las publicaciones
@@ -67,8 +70,10 @@ public class PublicacionControlador {
     
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping("/registrarPubli")
-    public String registrarPublicacion(){ 
-        //Agg html para crear publicacion
+    public String registrarPublicacion(HttpSession session, ModelMap modelo){ 
+         Usuario logueado = (Usuario) session.getAttribute("usuariosession");
+            modelo.addAttribute("usuario", logueado);
+        
         return "publicaciones.html";
         
     }

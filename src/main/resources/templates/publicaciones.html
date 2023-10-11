@@ -7,7 +7,7 @@
       <nav th:replace="/template.fragments/navbar :: nav"> </nav>
 
     <div class="form-container container-fluid col-3">
-    <form th:action="@{/publicacion/__${publicacion.usuario.idUsuario}__}}" method="POST">
+    <form th:action="@{/publicacion/__${usuario.idUsuario}__}}" method="POST">
     <h3 class="form-h3">Subí tu publicación</h3>
     <div class="mb-3"> 
       <label for="exampleFormControlInput1"  class="form-label">Titulo de la publicación</label>
