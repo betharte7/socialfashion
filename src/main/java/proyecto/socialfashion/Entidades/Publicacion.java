@@ -121,7 +121,6 @@ public class Publicacion {
         this.estado = estado;
     }
 
-
 /*
     public List<Comentario> getComentarios() {
         return comentarios;
