@@ -54,6 +54,7 @@ public class Publicacion {
     private Imagen imagen;
 
     public Publicacion() {
+
     }
 
     public Publicacion(String idPublicacion, String titulo, String Contenido, Date alta, Categoria categoria, boolean estado, Usuario usuario, Imagen imagen) {
@@ -63,14 +64,10 @@ public class Publicacion {
         this.alta = alta;
         this.categoria = categoria;
         this.estado = estado;
-
         this.usuario = usuario;
         this.imagen = imagen;
     }
 
-
- 
- 
 
     public String getIdPublicacion() {
         return idPublicacion;
@@ -147,7 +144,7 @@ public class Publicacion {
         this.imagen = imagen;
     }
 
-   
+
     
     
     
