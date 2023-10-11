@@ -5,11 +5,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
-//import javax.persistence.OneToOne;
-
 import org.hibernate.annotations.GenericGenerator;
-
 import proyecto.socialfashion.Enumeraciones.Roles;
 
 @Entity
@@ -19,6 +15,7 @@ public class Usuario {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String idUsuario;
+    
     private String nombre;
     private String password;
     
@@ -27,10 +24,7 @@ public class Usuario {
 
     private Boolean estado;
     private String email;
-    
-    @OneToOne
-    private Imagen imagen;
-   
+
     public Usuario() {
     }
 
@@ -58,10 +52,6 @@ public class Usuario {
         return email;
     }
    
-    public Imagen getImagen() {
-        return imagen;
-    }
-    
 
     public void setIdUsuario(String idUsuario) {
         this.idUsuario = idUsuario;
@@ -87,9 +77,7 @@ public class Usuario {
         this.email = email;
     }
     
-    public void setImagen(Imagen imagen) {
-        this.imagen = imagen;
-    } 
+
    
     
 

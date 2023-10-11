@@ -1,21 +1,7 @@
 * {
   box-sizing: border-box;
-}
-html,
-body {
-  height: 100%;
   margin: 0;
   padding: 0;
-}
-
-body {
-  background-image: url("https://images.pexels.com/photos/1884584/pexels-photo-1884584.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
-  font-family: "Euclid Circular A";
-  color: #000;
-  background-position: center 90%; /* Ajusta la posición vertical de la imagen */
 }
 
 /* Media query para pantallas más grandes */
@@ -58,7 +44,7 @@ body {
 }
 
 .login {
-  position: absolute;
+  position: relative;
   top: 20%;
   left: 50%;
   transform: translateX(-50%);
@@ -146,8 +132,33 @@ body {
   /* Pantallas de 1024x768 a 1280x1024 */
   .login {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
   }
+
+  .formulario {
+    position: relative;
+    text-align: center;
+    padding: 10px;
+    box-shadow: 4px 4px 10px 4px rgb(186, 186, 186);
+    border-radius: 10px;
+    top: 50px;
+    z-index: 20;
+  }
+}
+
+.navbar_logo {
+  width: 36px;
+  border-radius: 50%;
+  filter: opacity(0.8);
+}
+
+.table th {
+  border: 1px solid gray;
+}
+
+.form-h3 {
+  text-align: center;
+  text-shadow: 2px 2px 4px rgb(255, 255, 255);
 }

@@ -1,13 +1,14 @@
 package proyecto.socialfashion.Servicios;
 
+import java.awt.print.Pageable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import proyecto.socialfashion.Entidades.Imagen;
@@ -27,9 +28,10 @@ public class PublicacionServicio {
     ImagenServicio imagenServicio;
 
     @Transactional
-    public void CrearPublicacion(MultipartFile archivo, String contenido, Date alta, String categoria, Usuario usuario) throws Excepciones {
+    public void CrearPublicacion(MultipartFile archivo,String titulo ,String contenido, Date alta, String categoria, Usuario usuario) throws Excepciones {
 
         Publicacion publicacion = new Publicacion();
+        publicacion.setTitulo(titulo);
         publicacion.setContenido(contenido);
         publicacion.setAlta(alta);
 
@@ -60,7 +62,9 @@ public class PublicacionServicio {
     public Publicacion getOne(String idPublicacion) {
         return publicacionRepositorio.getOne(idPublicacion);
     }
-
+    
+    //Trabajar en este servicio
+/*
     @Transactional()
     public List<Publicacion> listaPublicacionOrdenadasPorLikes() {
 
@@ -71,19 +75,30 @@ public class PublicacionServicio {
         Collections.sort(listaPublicacion, new Comparator<Publicacion>() {
             @Override
             public int compare(Publicacion publicacion1, Publicacion publicacion2) {
-                int likes1 = publicacion1.getLikes().size();
-                int likes2 = publicacion2.getLikes().size();
+                for (Publicacion likes1 : publicacion1) {
+                    
+                }
+                
+                for (Publicacion likes2 : publicacion2) {
+                    
+                }
+                List<int> likes1 = publicacion1.getLikes();
+                int likes2 = publicacion2.getLikes();
                 return Integer.compare(likes2, likes1);
 
             }
         });
-
-        return listaPublicacion;
+        
+       //Creo una nueva lista para verificar que esten en alta 
+        List<Publicacion> listaVerificada = VerificarEstado(listaPublicacion);
+        
+        return listaVerificada;
     }
-
+*/
     @Transactional()
     public List<Publicacion> listaPublicacionOrdenadasPorFechaAlta() {
-
+        
+        //Creo lista para guardar las publicaciones
         List<Publicacion> listaPublicacion = new ArrayList<>();
         listaPublicacion = publicacionRepositorio.findAll();
 
@@ -96,11 +111,33 @@ public class PublicacionServicio {
 
             }
         });
+        
+        //Creo una nueva lista para verificar que esten en alta 
+        List<Publicacion> listaVerificada = VerificarEstado(listaPublicacion);
+        
 
-        return listaPublicacion;
+        return listaVerificada;
     }
+    
+    @Transactional()
+    public List<Publicacion> listaPublicacionGuest() {
+        
+        //Creo lista para guardar las publicaciones
+        List<Publicacion> listaPublicacion = new ArrayList<>();
+        Date fechaHoy = new Date(); 
+        listaPublicacion = publicacionRepositorio.buscarPrimeras10PorFechaDeAlta(fechaHoy);
+        
+        List<Publicacion> GuardarPrimeras10 = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            GuardarPrimeras10.add(listaPublicacion.get(i));
+        }
+        //Creo una nueva lista para verificar que esten en alta 
+        List<Publicacion> listaVerificada = VerificarEstado(GuardarPrimeras10);
+        return listaVerificada;
+    }
+    
 
-    @Transactional
+    @Transactional()
     public void BajaPublicacion(String idPublicacion) {
 
         Publicacion publicacion = publicacionRepositorio.getById(idPublicacion);
@@ -108,8 +145,11 @@ public class PublicacionServicio {
 
     }
 
-    public void validar(String contenido, Date alta, String categoria, Usuario usuario, Imagen imagen) throws Excepciones {
-
+    public void validar(String titulo, String contenido, Date alta, String categoria, Usuario usuario, Imagen imagen) throws Excepciones {
+       
+        if (titulo.isEmpty() || titulo.equalsIgnoreCase("")) {
+            throw new Excepciones("El titulo no puede estar estar vacio");
+        }
         if (contenido.isEmpty() || contenido.equalsIgnoreCase("")) {
             throw new Excepciones("El contenido no puede estar estar vacio");
         }
@@ -132,4 +172,21 @@ public class PublicacionServicio {
 
     }
 
+    //Metodo para validar estado de la publicacion si no fue dada de baja
+    public List<Publicacion> VerificarEstado(List<Publicacion>listaPublicacion){
+
+        //Creo una nueva lista para verificar que esten en alta 
+        List<Publicacion> listaVerificada = new ArrayList<>();
+        //For para recorrer todo el arrayList y que funcione 
+        for (Publicacion publicacion : listaPublicacion) {
+            if (publicacion.isEstado() == true) {
+                listaVerificada.add(publicacion);
+            }
+        }
+
+        return listaVerificada;
+    }
+    
+    
+    
 }

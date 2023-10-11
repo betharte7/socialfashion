@@ -1,7 +1,7 @@
 
 package proyecto.socialfashion.Entidades;
 
-import java.util.ArrayList;
+
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
@@ -9,7 +9,9 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -25,6 +27,9 @@ public class Publicacion {
     private String idPublicacion;
     
     @Basic
+    private String titulo;
+    
+    @Basic
     private String Contenido;
     
     @Temporal(TemporalType.DATE)
@@ -34,35 +39,37 @@ public class Publicacion {
     private Categoria categoria;
    
     private boolean estado;
+
+    @ManyToOne
+    @JoinColumn(name = "id_Usuario")
+    private Usuario usuario;
     
-    @OneToMany
-    private ArrayList<Like> likes;
     /*
     @OneToMany
-    private ArrayList<Comentario> comentarios;
+    private List<Comentario> comentarios;
     */
     
     @OneToOne
-    private Usuario usuario;
-    
-    @OneToOne
+    @JoinColumn(name = "id_Imagen")
     private Imagen imagen;
 
     public Publicacion() {
     }
 
-    public Publicacion(String idPublicacion, String Contenido, Date alta, Categoria categoria, boolean estado, ArrayList<Like> likes, /*ArrayList<Comentario> comentarios,*/ Usuario usuario, Imagen imagen) {
+    public Publicacion(String idPublicacion, String titulo, String Contenido, Date alta, Categoria categoria, boolean estado, Usuario usuario, Imagen imagen) {
         this.idPublicacion = idPublicacion;
+        this.titulo = titulo;
         this.Contenido = Contenido;
         this.alta = alta;
         this.categoria = categoria;
         this.estado = estado;
-        this.likes = likes;
-        /*this.comentarios = comentarios;*/
+
         this.usuario = usuario;
         this.imagen = imagen;
     }
 
+
+ 
  
 
     public String getIdPublicacion() {
@@ -72,6 +79,15 @@ public class Publicacion {
     public void setIdPublicacion(String idPublicacion) {
         this.idPublicacion = idPublicacion;
     }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+    
 
     public String getContenido() {
         return Contenido;
@@ -105,22 +121,17 @@ public class Publicacion {
         this.estado = estado;
     }
 
-    public ArrayList<Like> getLikes() {
-        return likes;
-    }
 
-    public void setLikes(ArrayList<Like> likes) {
-        this.likes = likes;
-    }
 /*
-    public ArrayList<Comentario> getComentarios() {
+    public List<Comentario> getComentarios() {
         return comentarios;
     }
 
-    public void setComentarios(ArrayList<Comentario> comentarios) {
+    public void setComentarios(List<Comentario> comentarios) {
         this.comentarios = comentarios;
     }
 */
+
     public Usuario getUsuario() {
         return usuario;
     }
