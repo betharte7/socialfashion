@@ -4,20 +4,24 @@
  */
 package proyecto.socialfashion.Servicios;
 
+
+
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import proyecto.socialfashion.Entidades.Imagen;
-import proyecto.socialfashion.Excepciones.MiException;
+import proyecto.socialfashion.Entidades.Publicacion;
+import proyecto.socialfashion.Excepciones.Excepciones;
 import proyecto.socialfashion.Repositorios.ImagenRepositorio;
 
 @Service
 public class ImagenServicio {
-    @Autowired
+    
+     @Autowired
     private ImagenRepositorio imagenRepositorio;
     
-    public Imagen guardar(MultipartFile archivo) throws MiException{
+    public Imagen guardar(MultipartFile archivo, Publicacion publicacion) throws Excepciones{
         if(archivo != null){
             try {
                     
@@ -27,7 +31,7 @@ public class ImagenServicio {
                 imagen.setNombre(archivo.getName());
                 
                 imagen.setContenido(archivo.getBytes());
-                
+                imagen.setPublicacion(publicacion);
                 return imagenRepositorio.save(imagen);
             } catch (Exception e) {
                 System.err.println(e.getMessage());
@@ -36,7 +40,7 @@ public class ImagenServicio {
         return null;
     }
     
-    public Imagen actualizar(MultipartFile archivo, String idImagen) throws MiException{
+    public Imagen actualizar(MultipartFile archivo, String idImagen) throws Excepciones{
     
            if(archivo != null){
             try {
@@ -63,4 +67,5 @@ public class ImagenServicio {
         return null;
         
     }
+    
 }
