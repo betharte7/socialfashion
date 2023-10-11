@@ -18,52 +18,51 @@ import proyecto.socialfashion.Enumeraciones.Categoria;
 
 @Entity
 public class Publicacion {
-    
+
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String idPublicacion;
-    
+
     @Basic
     private String Contenido;
-    
+
     @Temporal(TemporalType.DATE)
     private Date alta;
-     
+
     @Enumerated(EnumType.STRING)
     private Categoria categoria;
-   
+
     private boolean estado;
-    
+
     @OneToMany
-    private ArrayList<Like> likes;
+    private List<Like> likes;
     /*
-    @OneToMany
-    private ArrayList<Comentario> comentarios;
-    */
-    
+     * @OneToMany
+     * private ArrayList<Comentario> comentarios;
+     */
+
     @OneToOne
     private Usuario usuario;
-    
+
     @OneToOne
     private Imagen imagen;
 
     public Publicacion() {
     }
 
-    public Publicacion(String idPublicacion, String Contenido, Date alta, Categoria categoria, boolean estado, ArrayList<Like> likes, /*ArrayList<Comentario> comentarios,*/ Usuario usuario, Imagen imagen) {
+    public Publicacion(String idPublicacion, String Contenido, Date alta, Categoria categoria, boolean estado,
+            List<Like> likes, /* ArrayList<Comentario> comentarios, */ Usuario usuario, Imagen imagen) {
         this.idPublicacion = idPublicacion;
         this.Contenido = Contenido;
         this.alta = alta;
         this.categoria = categoria;
         this.estado = estado;
         this.likes = likes;
-        /*this.comentarios = comentarios;*/
+        /* this.comentarios = comentarios; */
         this.usuario = usuario;
         this.imagen = imagen;
     }
-
- 
 
     public String getIdPublicacion() {
         return idPublicacion;
@@ -105,22 +104,23 @@ public class Publicacion {
         this.estado = estado;
     }
 
-    public ArrayList<Like> getLikes() {
+    public List<Like> getLikes() {
         return likes;
     }
 
-    public void setLikes(ArrayList<Like> likes) {
+    public void setLikes(List<Like> likes) {
         this.likes = likes;
     }
-/*
-    public ArrayList<Comentario> getComentarios() {
-        return comentarios;
-    }
 
-    public void setComentarios(ArrayList<Comentario> comentarios) {
-        this.comentarios = comentarios;
-    }
-*/
+    /*
+     * public ArrayList<Comentario> getComentarios() {
+     * return comentarios;
+     * }
+     * 
+     * public void setComentarios(ArrayList<Comentario> comentarios) {
+     * this.comentarios = comentarios;
+     * }
+     */
     public Usuario getUsuario() {
         return usuario;
     }
@@ -137,10 +137,4 @@ public class Publicacion {
         this.imagen = imagen;
     }
 
-   
-    
-    
-    
-    
-    
 }
