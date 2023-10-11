@@ -4,6 +4,7 @@ package proyecto.socialfashion.Servicios;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import javax.servlet.http.HttpSession;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,8 @@ import proyecto.socialfashion.Enumeraciones.Roles;
 import proyecto.socialfashion.Excepciones.Excepciones;
 import proyecto.socialfashion.Repositorios.UsuarioRepositorio;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 @Service
 public class UsuarioServicio implements UserDetailsService {
@@ -78,7 +81,7 @@ public class UsuarioServicio implements UserDetailsService {
     @Transactional
     public List<Usuario> listarUsuarios() {
 
-        List<Usuario> usuarios = new ArrayList();
+        List<Usuario> usuarios = new ArrayList<>();
 
         usuarios = usuarioRepositorio.findAll();
 
@@ -139,6 +142,34 @@ public class UsuarioServicio implements UserDetailsService {
         }
 
     }
+    
+     @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Usuario usuario = usuarioRepositorio.buscarPorEmail(email);
+
+        if (usuario != null) {
+
+            List<GrantedAuthority> permisos = new ArrayList();
+
+            GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + usuario.getRoles().toString());
+
+            permisos.add(p);
+
+            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+            
+            HttpSession session = attr.getRequest().getSession(true);
+            
+            session.setAttribute("usuariosession", usuario);
+            
+            return new User(usuario.getEmail(), usuario.getPassword(), permisos);
+
+        } else {
+
+            return null;
+
+        }
+
+    }
 
     public void validar(String nombre, String email, String password, String password2) throws Excepciones {
 
@@ -159,10 +190,6 @@ public class UsuarioServicio implements UserDetailsService {
         }
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'loadUserByUsername'");
-    }
+   
 
 }

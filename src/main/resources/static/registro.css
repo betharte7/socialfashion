@@ -56,14 +56,11 @@
   opacity: 0.8;
   font-size: 16px;
   text-align: center;
+  transition: height 0.3s ease;
 }
 
 .login-form-2 > input:hover {
   border-bottom: 3px solid #4e3eff;;
-}
-
-
-.login-form-2 > input:hover {
   height: 50px;
 }
 

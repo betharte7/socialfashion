@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
   <head th:replace="/template.fragments/head :: head"> </head>
       <body>
@@ -51,7 +52,7 @@
               th:value="${password2}"
             />
             <button type="submit">Registrarme</button>
-            <a href="">¿Ya tengo una cuenta?</a>
+            <a th:href="@{/usuarios/login}">¿Ya tengo una cuenta?</a>
           </form>
         </div>
         <script
@@ -61,5 +62,5 @@
         ></script>
       </body>
     </html>
-  </body>
-</html>
+ 
+

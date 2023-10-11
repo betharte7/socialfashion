@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
   <head th:replace="/template.fragments/head :: head"> </head>
   <body>
     <img
@@ -8,17 +11,19 @@
       alt="moda"
     />
 
-    <nav th:replace="/template.fragments/navbar :: nav"> </nav>
-        
-        
-        <div class="container-fluid m5 contenedor col-6">
-            
-            <form class="formulario_nombre" th:action="@{/usuarios/buscarnombre}" method="POST" enctype="multipart/form-data">
-                
-                <div th:if="${error != null}">
-                    <h5 style="color: red">ERROR!!! :(</h5>
-                    <p th:text="${error}"></p>
-                </div>
+    <nav th:replace="/template.fragments/navbar :: nav"></nav>
+
+    <div class="container-fluid m5 contenedor col-6">
+      <form
+        class="formulario_nombre"
+        th:action="@{/usuarios/buscarnombre}"
+        method="POST"
+        enctype="multipart/form-data"
+      >
+        <div th:if="${error != null}">
+          <h5 style="color: red">ERROR!!! :(</h5>
+          <p th:text="${error}"></p>
+        </div>
 
         <div th:if="${exito != null}">
           <h5 style="color: green">Éxito!!! :)</h5>
@@ -38,9 +43,7 @@
           />
         </div>
 
-        <button type="submit" class="btn mt-3 botones">
-          Buscar
-        </button>
+        <button type="submit" class="btn mt-3 botones">Buscar</button>
       </form>
     </div>
 

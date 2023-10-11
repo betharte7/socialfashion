@@ -35,6 +35,14 @@ public class UsuarioControlador {
     public String registrar() {
         return "registro.html";
     }
+    
+    @GetMapping("/login")
+    public String login(@RequestParam (required = false) String error, ModelMap modelo){
+        if (error != null) {
+            modelo.put("Error", "Usuario o Contraseña invalidos!");
+        }
+        return "login.html";
+    }
 
     @PostMapping("/registro")
     public String registro(@RequestParam String nombre, @RequestParam String email, @RequestParam String password,

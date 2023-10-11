@@ -30,10 +30,10 @@ public class Imagen {
         this.mime = mime;
         this.nombre = nombre;
         this.contenido = contenido;
+        
     }
-     
-     
 
+    
     public String getIdImagen() {
         return idImagen;
     }
