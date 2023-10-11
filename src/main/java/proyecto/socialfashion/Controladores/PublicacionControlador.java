@@ -9,7 +9,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -71,7 +70,7 @@ public class PublicacionControlador {
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping("/registrarPubli")
     public String registrarPublicacion(HttpSession session, ModelMap modelo){ 
-         Usuario logueado = (Usuario) session.getAttribute("usuariosession");
+            Usuario logueado = (Usuario) session.getAttribute("usuariosession");
             modelo.addAttribute("usuario", logueado);
         
         return "publicaciones.html";
@@ -80,20 +79,19 @@ public class PublicacionControlador {
     
     
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
-    @PostMapping("/registro/{idUsuario}")
-    public String registro(@RequestParam String titulo, @RequestParam String contenido, @RequestParam("categoria") String categoria, @PathVariable String idUsuario, ModelMap modelo, MultipartFile archivo){
+    @PostMapping("/registro")
+    public String registro(@RequestParam String titulo, @RequestParam String contenido, @RequestParam("categoria") String categoria, ModelMap modelo, MultipartFile archivo, HttpSession session){
         
         try {
             
-            //Servicio para traer un usuario
-            Usuario usuario = usuarioServicio.getOne(idUsuario);
+           Usuario logueado = (Usuario) session.getAttribute("usuariosession");
+           publicacionServicio.CrearPublicacion(archivo, titulo , contenido,new Date() , categoria, logueado);
 
-            publicacionServicio.CrearPublicacion(archivo, titulo , contenido,new Date() , categoria, usuario);
-
+           
             modelo.put("exito", "Publicacion registrada correctamente!");
             
             //Agg html en el que este el formulario. IDEM ANTERIOR
-            return "";
+             return"index.html";
         } catch (Excepciones ex) {
             
             modelo.put("Error", ex.getMessage());
@@ -102,7 +100,7 @@ public class PublicacionControlador {
             modelo.put("email", categoria);
             
             //Agg html en el que este el formulario. IDEM ANTERIOR o Que redireccione a una pagina error
-            return "";
+            return "error.html";
         }
         
     }
