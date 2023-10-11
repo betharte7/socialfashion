@@ -24,7 +24,7 @@ public class ImagenControlador {
     @Autowired
     PublicacionServicio publicacionServicio;
     
-    @GetMapping("/publicacion/{idPublicacion}")
+    @GetMapping("/publicacion/registro")
     public ResponseEntity<byte[]> imagenUsuario(@PathVariable String idPublicacion){
         Publicacion publicacion = publicacionServicio.getOne(idPublicacion);
         

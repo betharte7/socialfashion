@@ -63,7 +63,6 @@ public class Publicacion {
         this.alta = alta;
         this.categoria = categoria;
         this.estado = estado;
-
         this.usuario = usuario;
         this.imagen = imagen;
     }

@@ -6,6 +6,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.OneToOne;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
@@ -22,16 +23,21 @@ public class Imagen {
     @Lob @Basic(fetch = FetchType.LAZY)
     private byte[] contenido;
 
+    @OneToOne
+    private Publicacion publicacion;
+    
     public Imagen() {
     }
 
-    public Imagen(String idImagen, String mime, String nombre, byte[] contenido) {
+    public Imagen(String idImagen, String mime, String nombre, byte[] contenido, Publicacion publicacion) {
         this.idImagen = idImagen;
         this.mime = mime;
         this.nombre = nombre;
         this.contenido = contenido;
-        
+        this.publicacion = publicacion;
     }
+
+  
 
     
     public String getIdImagen() {
@@ -66,6 +72,15 @@ public class Imagen {
         this.contenido = contenido;
     }
 
+    public Publicacion getPublicacion() {
+        return publicacion;
+    }
+
+    public void setPublicacion(Publicacion publicacion) {
+        this.publicacion = publicacion;
+    }
+    
+  
     @Override
     public String toString() {
         return "Imagen: " + "idImagen=" + idImagen + ", mime=" + mime + ", nombre=" + nombre + ", contenido=" + contenido;

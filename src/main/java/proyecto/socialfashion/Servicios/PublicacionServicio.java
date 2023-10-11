@@ -50,7 +50,7 @@ public class PublicacionServicio {
 
         publicacion.setUsuario(usuario);
 
-        Imagen imagen = imagenServicio.guardar(archivo);
+        Imagen imagen = imagenServicio.guardar(archivo, publicacion);
 
         publicacion.setImagen(imagen);
         
