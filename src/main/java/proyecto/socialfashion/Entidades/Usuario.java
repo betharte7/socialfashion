@@ -5,6 +5,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 //import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -26,10 +27,10 @@ public class Usuario {
 
     private Boolean estado;
     private String email;
-    /* 
+    
     @OneToOne
     private Imagen imagen;
-    */
+   
     public Usuario() {
     }
 
@@ -56,11 +57,11 @@ public class Usuario {
     public String getEmail() {
         return email;
     }
-    /* 
+   
     public Imagen getImagen() {
         return imagen;
     }
-    */
+    
 
     public void setIdUsuario(String idUsuario) {
         this.idUsuario = idUsuario;
@@ -85,11 +86,11 @@ public class Usuario {
     public void setEmail(String email) {
         this.email = email;
     }
-    /* 
+    
     public void setImagen(Imagen imagen) {
         this.imagen = imagen;
     } 
-    */
+   
     
 
 }
