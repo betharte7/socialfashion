@@ -32,6 +32,17 @@ public class Usuario {
     */
     public Usuario() {
     }
+    
+
+    public Usuario(String idUsuario, String nombre, String password, Roles roles, Boolean estado, String email) {
+        this.idUsuario = idUsuario;
+        this.nombre = nombre;
+        this.password = password;
+        this.roles = roles;
+        this.estado = estado;
+        this.email = email;
+    }
+
 
     public String getIdUsuario() {
         return idUsuario;

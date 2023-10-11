@@ -23,19 +23,22 @@ import proyecto.socialfashion.Servicios.ComentarioServicio;
 @RequestMapping("/")
 public class ComentarioControlador {
 
-    @Autowired
     private ComentarioServicio comentarioServicio;
-
-    @Autowired
     private PublicacionRepositorio publicacionRepositorio;
 
+    @Autowired
+    public ComentarioControlador(ComentarioServicio comentarioServicio,
+                                PublicacionRepositorio publicacionRepositorio){
+        this.comentarioServicio=comentarioServicio;
+        this.publicacionRepositorio=publicacionRepositorio;
+    }
 
     @PostMapping("/publicacion/{idPublicacion}")
     @PreAuthorize("isAuthenticated()")
     public String guardarComentario(
             @PathVariable String idPublicacion,
             @RequestBody String texto,
-            @AuthenticationPrincipal Usuario usuario,Model modelo) {
+            @AuthenticationPrincipal Usuario usuario, Model modelo) {
 
         try {
             Optional<Publicacion> respuesta = publicacionRepositorio.findById(idPublicacion);
@@ -45,10 +48,10 @@ public class ComentarioControlador {
                 comentarioServicio.guardarComentario(comentario);
                 modelo.addAttribute("mensaje", "Comentario guardado exitosamente");
                 return "index.html";
-            }else{
+            } else {
                 modelo.addAttribute("mensaje", "Publicacion inexistente");
                 return "index.html";
-            }    
+            }
         } catch (Exception e) {
             modelo.addAttribute(e.getMessage());
             return "index.html";
@@ -65,22 +68,22 @@ public class ComentarioControlador {
             Optional<Comentario> respuesta = comentarioServicio.buscarComentarioPorId(idComentario);
             if (respuesta.isPresent()) {
                 Comentario comentario = respuesta.get();
-                if(comentario.getIdUsuario().toString()==usuario.getIdUsuario().toString()){
+                if (comentario.getIdUsuario().toString() == usuario.getIdUsuario().toString()) {
                     comentarioServicio.borrarComentario(comentario.getIdComentario());
                     modelo.addAttribute("mensaje", "Comentario guardado exitosamente");
                     return "index.html";
-                }else{
+                } else {
                     modelo.addAttribute("mensaje", "Usuario Incorrecto");
                     return "index.html";
-                }  
-            }else{
-                modelo.addAttribute("mensaje", "Comentario inexistente"); 
-                return "index.html"; 
-            }    
+                }
+            } else {
+                modelo.addAttribute("mensaje", "Comentario inexistente");
+                return "index.html";
+            }
         } catch (Exception e) {
             modelo.addAttribute(e.getMessage());
             return "index.html";
         }
     }
-    
+
 }
