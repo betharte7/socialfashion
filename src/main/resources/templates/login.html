@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+  <head th:replace="/template.fragments/head :: head"> </head>
+  <body>
+    
+    <nav th:replace="/template.fragments/navbar :: nav"> </nav>
+
+    <div class="login">
+      <h3>Bienvenido</h3>
+      <form class="login-form">
+        <input type="text" placeholder="Ingrese nombre" />
+        <input type="password" placeholder="Contraseña" />
+        <input type="password" placeholder="Confirmar contraseña" />
+        <input type="password" placeholder="Ingrese email" />
+        <button type="submit">Modifica</button>
+      </form>
+    </div>
+  </body>
+</html>

@@ -12,9 +12,16 @@
     object-fit: cover;
     }
 
-     .form-container{
+    .navbar_logo{
+        width: 36px;
+        border-radius: 50%;
+        filter: opacity(0.8);
+      }
+      
+      
+    .form-container{
     position: relative;
-    min-width: 350px;
+    min-width: 360px;
     padding: 10px;
     box-shadow: 4px 4px 10px 4px rgb(186, 186, 186);
     border-radius: 10px;
@@ -25,6 +32,15 @@
     .form-h3{
     text-align: center;
     text-shadow: 2px 2px 4px rgb(255, 255, 255);
+
     }  
     
+
     
+
+
+
+    
+    
+
+
