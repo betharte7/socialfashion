@@ -10,17 +10,18 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import proyecto.socialfashion.Entidades.Publicacion;
 import proyecto.socialfashion.Entidades.Usuario;
-import proyecto.socialfashion.Enumeraciones.Categoria;
 import proyecto.socialfashion.Excepciones.Excepciones;
 
 import proyecto.socialfashion.Servicios.PublicacionServicio;
 import proyecto.socialfashion.Servicios.UsuarioServicio;
 
 @Controller
+@RequestMapping("/publicacion")
 public class PublicacionControlador {
     
     @Autowired
@@ -30,44 +31,59 @@ public class PublicacionControlador {
     UsuarioServicio usuarioServicio;
     
     
-    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping("/publicaciones")
     public String publicaciones(ModelMap modelo){
-        try {
-            ArrayList<Publicacion> publicacionesAlta = (ArrayList<Publicacion>) publicacionServicio.listaPublicacionOrdenadasPorFechaAlta();
-            modelo.put("listaPorTendencias", publicacionesAlta);
+        /*try {*/
+            ArrayList<Publicacion> publicacionesAlta = (ArrayList<Publicacion>) publicacionServicio.listaPublicacionGuest();
+            modelo.addAttribute("publicacionesAlta", publicacionesAlta);
             //HTML con la pagina en donde se encuentran las publicaciones
-            return"";
-        } catch (Excepciones ex) {
+            return"index.html";
+        /*} catch (Excepciones ex) {
             modelo.put("Error", ex.getMessage());
             //HTML en donde se se trabaje el error
-            return"";
-        }
+            return"error.html";
+        }*/
     }
     
     
     
-    
-    
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+    @GetMapping("/publicacionesSocialFashion")
+    public String publicacionesParaRegistados(ModelMap modelo){
+        /*try {*/
+            ArrayList<Publicacion> publicacionesAlta = (ArrayList<Publicacion>) publicacionServicio.listaPublicacionOrdenadasPorFechaAlta();
+            modelo.addAttribute("publicacionesAlta", publicacionesAlta);
+            //HTML con la pagina en donde se encuentran las publicaciones
+            return"index.html";
+            /*
+        } catch (Excepciones ex) {
+            modelo.put("Error", ex.getMessage());
+            //HTML en donde se se trabaje el error
+            return"error.html";
+        }
+            */
+    }
     
     
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping("/registrarPubli")
-    public String registrarPublicacion(){
+    public String registrarPublicacion(){ 
         //Agg html para crear publicacion
-    return "";
+        return "publicaciones.html";
+        
     }
+    
     
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @PostMapping("/registro/{idUsuario}")
-    public String registro(@RequestParam String contenido, @RequestParam String categoria, @PathVariable String idUsuario, ModelMap modelo, MultipartFile archivo){
+    public String registro(@RequestParam String titulo, @RequestParam String contenido, @RequestParam("categoria") String categoria, @PathVariable String idUsuario, ModelMap modelo, MultipartFile archivo){
         
         try {
             
             //Servicio para traer un usuario
             Usuario usuario = usuarioServicio.getOne(idUsuario);
 
-            publicacionServicio.CrearPublicacion(archivo, contenido,new Date() , categoria, usuario);
+            publicacionServicio.CrearPublicacion(archivo, titulo , contenido,new Date() , categoria, usuario);
 
             modelo.put("exito", "Publicacion registrada correctamente!");
             
@@ -86,7 +102,7 @@ public class PublicacionControlador {
         
     }
     
-    
+    /*
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping("/tendencias")
     public String Tendencias(ModelMap modelo){
@@ -94,7 +110,7 @@ public class PublicacionControlador {
         try {
             
            ArrayList<Publicacion>listaPorTendencias = (ArrayList<Publicacion>) publicacionServicio.listaPublicacionOrdenadasPorLikes();
-            modelo.put("listaPorTendencias", listaPorTendencias);
+            modelo.addAttribute("listaPorTendencias", listaPorTendencias);
             
             //HTML en el que se encuentran las tendencias
             return"";
@@ -109,7 +125,7 @@ public class PublicacionControlador {
     
     }
     
-    
+    */
     
     
     

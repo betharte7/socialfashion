@@ -33,7 +33,7 @@
                   <a class="nav-link active" aria-current="page" href="loggin.html">Iniciar Sesion</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Registrarse</a>
+                  <a class="nav-link" th:href="@{/usuarios/registrar}">Registrarse</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#">Blog</a>
@@ -43,12 +43,12 @@
                     @User
                   </a>
                   <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Publicar Diseño</a></li>
-                    <li><a class="dropdown-item" href="#">Ver publicaciones</a></li>
+                    <li><a class="dropdown-item" th:href="@{/publicacion/registrarPubli}">Publicar Diseño</a></li>
+                    <li><a class="dropdown-item" th:href="@{/publicacion/publicaciones}">Ver publicaciones</a></li>
                     <li>
                       <hr class="dropdown-divider">
                     </li>
-                    <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
+                    <li><a class="dropdown-item" href="/logout">Cerrar sesión</a></li>
                   </ul>
                 </li>
               </ul>
