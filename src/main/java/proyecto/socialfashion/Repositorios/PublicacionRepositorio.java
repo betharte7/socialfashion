@@ -27,5 +27,3 @@ public interface PublicacionRepositorio extends JpaRepository<Publicacion, Strin
 
     
 }
-
-

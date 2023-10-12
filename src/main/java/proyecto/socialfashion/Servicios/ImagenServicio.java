@@ -31,7 +31,6 @@ public class ImagenServicio {
                 imagen.setNombre(archivo.getName());
                 
                 imagen.setContenido(archivo.getBytes());
-                
                 imagen.setPublicacion(publicacion);
                 return imagenRepositorio.save(imagen);
             } catch (Exception e) {

@@ -1,5 +1,6 @@
 package proyecto.socialfashion.Servicios;
 
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -7,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import proyecto.socialfashion.Entidades.Imagen;
@@ -48,12 +50,12 @@ public class PublicacionServicio {
 
         publicacion.setUsuario(usuario);
 
-        Imagen imagen = imagenServicio.guardar(archivo, publicacion);
+        Imagen imagen = imagenServicio.guardar(archivo,publicacion);
 
         publicacion.setImagen(imagen);
         
-        publicacionRepositorio.save(publicacion);
-
+        publicacionRepositorio.save(publicacion); 
+              
     }
 
     @Transactional()

@@ -1,4 +1,3 @@
-
 package proyecto.socialfashion.Repositorios;
 
 import org.springframework.data.jpa.repository.JpaRepository;

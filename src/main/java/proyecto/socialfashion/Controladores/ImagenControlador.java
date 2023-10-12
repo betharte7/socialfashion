@@ -1,7 +1,4 @@
-
 package proyecto.socialfashion.Controladores;
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -14,9 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import proyecto.socialfashion.Entidades.Publicacion;
 import proyecto.socialfashion.Servicios.PublicacionServicio;
 
-
-
-
 @Controller
 @RequestMapping("/imagen")
 public class ImagenControlador {
@@ -24,7 +18,7 @@ public class ImagenControlador {
     @Autowired
     PublicacionServicio publicacionServicio;
     
-    @GetMapping("/publicacion/registro")
+    @GetMapping("/publicacion/{idPublicacion}")
     public ResponseEntity<byte[]> imagenUsuario(@PathVariable String idPublicacion){
         Publicacion publicacion = publicacionServicio.getOne(idPublicacion);
         

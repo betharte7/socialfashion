@@ -1,4 +1,3 @@
-
 package proyecto.socialfashion.Entidades;
 
 
@@ -54,6 +53,7 @@ public class Publicacion {
     private Imagen imagen;
 
     public Publicacion() {
+
     }
 
     public Publicacion(String idPublicacion, String titulo, String Contenido, Date alta, Categoria categoria, boolean estado, Usuario usuario, Imagen imagen) {
@@ -67,9 +67,6 @@ public class Publicacion {
         this.imagen = imagen;
     }
 
-
- 
- 
 
     public String getIdPublicacion() {
         return idPublicacion;
@@ -120,7 +117,6 @@ public class Publicacion {
         this.estado = estado;
     }
 
-
 /*
     public List<Comentario> getComentarios() {
         return comentarios;
@@ -147,7 +143,7 @@ public class Publicacion {
         this.imagen = imagen;
     }
 
-   
+
     
     
     
