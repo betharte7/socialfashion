@@ -13,9 +13,7 @@
        <i class="fa-brands fa-pinterest"> </i>
       <h2> Diseños de autores </h2>
      </div>
-
     </section>
-
      <section class="diseños container">
       <h2>Ultimos diseños</h2>
       <div class="swiper mySwiper">
@@ -24,7 +22,7 @@
                  <div class="swiper-slide">
                    <h4>User</h4> 
                  <img src="../static/Imagenes/img1.jpg" alt="">
-                  <p>Descripcion de esta foto y diseno que publican</p>
+                  <p>Descripcion de esta foto y diseño que publican</p>
                  </div>
                  <div class="swiper-slide">
                   <h4> </h4>
@@ -65,7 +63,6 @@
                    </div>
             </div>
         </div>
-      
       <div class="swiper-wrapper">
         <div th:each="publicacion : ${publicacionesAlta}" class="swiper-slide">
         <h4 th:text="${publicacion.titulo}"></h4>
@@ -73,9 +70,7 @@
         <p th:text="${publicacion.contenido}"></p>
         </div>
     </div>
-
     </section>
-
     <section class="icons container">
        <i class="fa-solid fa-house"></i>
        <i class="fa-solid fa-fire-flame-curved"></i>

@@ -146,29 +146,17 @@ public class UsuarioServicio implements UserDetailsService {
      @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Usuario usuario = usuarioRepositorio.buscarPorEmail(email);
-
         if (usuario != null) {
-
             List<GrantedAuthority> permisos = new ArrayList();
-
             GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + usuario.getRoles().toString());
-
             permisos.add(p);
-
             ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-            
             HttpSession session = attr.getRequest().getSession(true);
-            
             session.setAttribute("usuariosession", usuario);
-            
             return new User(usuario.getEmail(), usuario.getPassword(), permisos);
-
         } else {
-
             return null;
-
         }
-
     }
 
     public void validar(String nombre, String email, String password, String password2) throws Excepciones {
