@@ -7,7 +7,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +19,7 @@ import proyecto.socialfashion.Entidades.Publicacion;
 import proyecto.socialfashion.Entidades.Usuario;
 import proyecto.socialfashion.Repositorios.PublicacionRepositorio;
 import proyecto.socialfashion.Servicios.ComentarioServicio;
+import proyecto.socialfashion.Servicios.PublicacionServicio;
 
 @Controller
 @RequestMapping("/")
@@ -25,12 +27,15 @@ public class ComentarioControlador {
 
     private ComentarioServicio comentarioServicio;
     private PublicacionRepositorio publicacionRepositorio;
+    private PublicacionServicio publicacionServicio;
 
     @Autowired
     public ComentarioControlador(ComentarioServicio comentarioServicio,
-                                PublicacionRepositorio publicacionRepositorio){
+                                PublicacionRepositorio publicacionRepositorio,
+                                PublicacionServicio publicacionServicio){
         this.comentarioServicio=comentarioServicio;
         this.publicacionRepositorio=publicacionRepositorio;
+        this.publicacionServicio=publicacionServicio;
     }
 
     @PostMapping("/publicacion/{idPublicacion}")
@@ -85,5 +90,14 @@ public class ComentarioControlador {
             return "index.html";
         }
     }
+/* 
+     @GetMapping("/publicacion/comentarios/{idPublicacion}")
+     @PreAuthorize("isAuthenticated()")
+     public String publicacionComentarios(@PathVariable String idPublicacion, 
+                                        @AuthenticationPrincipal Usuario usuario, ModelMap modelo, Model model){
+        Publicacion publicacion = publicacionServicio.buscarPorId(idPublicacion);
+
+     }
+   */
 
 }
